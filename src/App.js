@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import MelodyListContainer from "./components/MelodyListContainer";
 import Toolbar from "./components/Toolbar";
 import Footer from "./components/Footer";
+import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
 
 class App extends Component {
   render() {
@@ -17,7 +18,12 @@ class App extends Component {
         <Switch>
           <Route path="/signup" component={SignupContainer} />
           <Route path="/login" component={LoginContainer} />
-          <Route path="/" component={MelodyListContainer} />
+          <Route
+            // exact
+            path="/melody/:melodyId"
+            component={MelodyDetailsPageContainer}
+          />
+          <Route exact path="/" component={MelodyListContainer} />
         </Switch>
         <Footer />
       </div>

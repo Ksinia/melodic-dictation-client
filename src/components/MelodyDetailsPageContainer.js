@@ -7,10 +7,9 @@ class MelodyDetailsPageContainer extends Component {
   melodyId = this.props.match.params.melodyId;
   midiPlayer = new MidiPlayer();
 
-  play = () => {
-    this.midiPlayer.stop();
-    const buffer = Buffer.from(this.props.melody.content, "binary");
-    this.midiPlayer.play({ arrayBuffer: buffer });
+  play = async () => {
+    await this.midiPlayer.stop();
+    await this.midiPlayer.play({ url: this.props.melody.url });
   };
 
   componentDidMount() {

@@ -6,6 +6,7 @@ import LoginContainer from "./components/LoginContainer";
 import SignupContainer from "./components/SignupContainer";
 import { connect } from "react-redux";
 import MelodyListContainer from "./components/MelodyListContainer";
+import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
 
 class App extends Component {
   render() {
@@ -14,7 +15,12 @@ class App extends Component {
         <Switch>
           <Route path="/signup" component={SignupContainer} />
           <Route path="/login" component={LoginContainer} />
-          <Route path="/" component={MelodyListContainer} />
+          <Route
+            // exact
+            path="/melody/:melodyId"
+            component={MelodyDetailsPageContainer}
+          />
+          <Route exact path="/" component={MelodyListContainer} />
         </Switch>
       </div>
     );

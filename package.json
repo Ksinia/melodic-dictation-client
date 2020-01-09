@@ -21,7 +21,8 @@
     "react-scripts": "3.3.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "superagent": "^5.2.1"
+    "superagent": "^5.2.1",
+    "tone": "^13.8.25"
   },
   "scripts": {
     "start": "react-scripts start",

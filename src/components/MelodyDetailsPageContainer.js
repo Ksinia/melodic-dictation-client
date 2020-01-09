@@ -1,22 +1,45 @@
 import React, { Component } from "react";
 import { loadMelody, clearMelodyDetails } from "../actions/melody";
 import { connect } from "react-redux";
-// import * as fs from "fs-web";
-var fs = require("browserify-fs");
-// import MidiPlayer from "midi-player-js";
-// import { JZZ } from "jzz-midi-smf";
-const { Midi } = require("@tonejs/midi");
-var JZZ = require("jzz");
-require("jzz-midi-smf")(JZZ);
+import { Midi } from "@tonejs/midi";
+import Tone from "tone";
+
+/*
+var synth = new Tone.PolySynth(8).toMaster()
+MidiConvert.load("path/to/midi.mid", function(midi) {
+  // make sure you set the tempo before you schedule the events
+  Tone.Transport.bpm.value = midi.header.bpm
+  // pass in the note events from one of the tracks as the second argument to Tone.Part 
+  var midiPart = new Tone.Part(function(time, note) {
+    //use the events to play the synth
+    synth.triggerAttackRelease(note.name, note.duration, time, note.velocity)
+  }, midi.tracks[0].notes).start()
+  // start the transport to hear the events
+  Tone.Transport.start()
+})
+*/
 
 class MelodyDetailsPageContainer extends Component {
   melodyId = this.props.match.params.melodyId;
   play = () => {
-    var midiout = JZZ().openMidiOut();
-    var smf = new JZZ.MIDI.SMF(this.props.melody.content);
-    var player = smf.player();
-    player.connect(midiout);
-    player.play();
+    console.log("not breaking");
+    const midiFile = new Midi(Buffer.from(this.props.melody.content, "binary"));
+    console.log("MIDI: ", midiFile);
+
+    var synth = new Tone.PolySynth(8).toMaster();
+    Tone.Transport.bpm.value = midiFile.header.tempos[0].bpm;
+    // pass in the note events from one of the tracks as the second argument to Tone.Part
+    const myMidi = new Tone.Part(function(time, note) {
+      //use the events to play the synth
+      synth.triggerAttackRelease(note.name, note.duration, time, note.velocity);
+    }, midiFile.tracks[0].notes);
+    myMidi.start();
+    /*
+    const player = new Tone.Player(
+      Buffer.from(this.props.melody.content, "binary")
+    );
+    synth.triggerAttack("D3", "+1");
+    Tone.start();*/
   };
 
   componentDidMount() {

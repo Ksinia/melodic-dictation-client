@@ -25,7 +25,7 @@ export const loadMelody = melodyId => async dispatch => {
   console.log(url);
   try {
     const response = await superagent.get(url);
-    console.log("response test:", response);
+    // console.log("response test:", response);
     const action = {
       type: MELODY_LOADED,
       payload: response.body

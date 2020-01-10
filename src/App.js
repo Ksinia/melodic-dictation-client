@@ -23,7 +23,8 @@ class App extends Component {
             path="/melody/:melodyId"
             component={MelodyDetailsPageContainer}
           />
-          <Route exact path="/" component={MelodyListContainer} />
+          <Route path="/melody" component={MelodyListContainer} />
+          <Route path="/" component={MelodyListContainer} />
         </Switch>
         <Footer />
       </div>

@@ -33,7 +33,7 @@ export const loginSignupFunction = (
     dispatch(action);
     // dispatch the action that there is no errors
     dispatch(loginError(null));
-    // history.goBack();
+    history.goBack();
   } catch (error) {
     console.log("error test:", error);
     console.log(error.response.body);

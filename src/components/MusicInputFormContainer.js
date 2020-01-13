@@ -10,10 +10,6 @@ class MusicInputFormContainer extends Component {
 
   state = this.initialState;
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   onSubmit = event => {
     event.preventDefault();
   };
@@ -33,7 +29,7 @@ class MusicInputFormContainer extends Component {
           engraverParams={{ responsive: "resize" }}
           renderParams={{ viewportHorizontal: true }}
         />
-        <div className="notes">
+        <div className="notes" style={{ fontFamily: "Bravura" }}>
           {["E8", "E4", "E2", "E", "E1/2"].map(note => {
             return (
               <div
@@ -44,6 +40,7 @@ class MusicInputFormContainer extends Component {
                   });
                 }}
               >
+                {"\ue1d3"}
                 note
               </div>
             );

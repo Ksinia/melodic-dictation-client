@@ -1,0 +1,27 @@
+.input {
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  padding: 0.5em;
+  width: fit-content;
+  height: fit-content;
+  border: 0.5px solid gray;
+  border-radius: 5px;
+  justify-content: center;
+}
+
+.input div {
+  margin: 0.2em;
+}
+
+.notes {
+  display: flex;
+  flex-flow: row wrap;
+  vertical-align: middle;
+  height: 2em;
+}
+.otherSymbols {
+  display: flex;
+  flex-flow: row wrap;
+  vertical-align: middle;
+}

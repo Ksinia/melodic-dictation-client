@@ -22,8 +22,13 @@ function MelodyDetailsPage(props) {
             renderParams={{ viewportHorizontal: true }}
           />
           <hr></hr>
-          <button onClick={props.start}>Try</button>
-          {props.phase == "started" && <MusicInputFormContainer />}
+          <button onClick={props.start}>Create new answer</button>
+          {(props.phase == "started" || props.phase == "finished") && (
+            <MusicInputFormContainer
+              phase={props.phase}
+              changePhase={props.changePhase}
+            />
+          )}
           <p>Your previous dictations with this melody:</p>
         </div>
       ) : (

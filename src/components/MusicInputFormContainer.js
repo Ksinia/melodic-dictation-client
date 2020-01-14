@@ -132,13 +132,15 @@ class MusicInputFormContainer extends Component {
   };
 
   onSubmit = () => {
-    this.props.dispatch(
-      submitAnswer(
-        this.props.melody.id,
-        this.props.dictation.id,
-        this.state.userInput
+    this.props
+      .dispatch(
+        submitAnswer(
+          this.props.melody.id,
+          this.props.dictation.id,
+          this.state.userInput
+        )
       )
-    );
+      .then(() => this.props.changePhase("finished"));
   };
 
   getMinimumNoteDuration(abcStart) {
@@ -152,6 +154,19 @@ class MusicInputFormContainer extends Component {
   }
 
   minNoteDuration = this.getMinimumNoteDuration(this.props.melody.abcStart);
+
+  componentDidUpdate(prevProps) {
+    console.log("component did update");
+    console.log("this.props.phase", this.props.phase);
+    console.log("prevProps.phase", prevProps.phase);
+    // Typical usage (don't forget to compare props):
+    if (
+      this.props.phase !== prevProps.phase &&
+      this.props.phase === "started"
+    ) {
+      this.setState({ ...this.state, userInput: [] });
+    }
+  }
 
   componentDidMount() {
     this.setState(this.initialState);
@@ -184,53 +199,63 @@ class MusicInputFormContainer extends Component {
           engraverParams={{ responsive: "resize" }}
           renderParams={{ viewportHorizontal: true }}
         />
-        <div className="input">
-          <div
-            className="notes"
-            style={{ fontFamily: "Bravura", fontSize: 40 }}
-          >
-            {this.state.notes.map(note => {
-              return (
-                <div key={note[1]} name={note[0]} onClick={this.addNote}>
-                  {note[1]}
+        {this.props.phase === "started" && (
+          <div>
+            <div className="input">
+              <div
+                className="notes"
+                style={{ fontFamily: "Bravura", fontSize: 40 }}
+              >
+                {this.state.notes.map(note => {
+                  return (
+                    <div key={note[1]} name={note[0]} onClick={this.addNote}>
+                      <div className="symbol">{note[1]}</div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div
+                className="otherSymbols"
+                style={{ fontFamily: "Bravura", fontSize: 40 }}
+              >
+                <div onClick={this.increasePitchOfLastNote}>
+                  <div className="symbol">⬆</div>
                 </div>
-              );
-            })}
-          </div>
-          <div
-            className="otherSymbols"
-            style={{ fontFamily: "Bravura", fontSize: 40 }}
-          >
-            <div onClick={this.increasePitchOfLastNote}>⬆</div>
-            <div onClick={this.decreasePitchOfLastNote}>⬇</div>
-            {this.signs.map(sign => {
-              return (
-                <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
-                  {sign[1]}
+                <div onClick={this.decreasePitchOfLastNote}>
+                  <div className="symbol">⬇</div>
                 </div>
-              );
-            })}
-            <div onClick={this.addDot}>.</div>
-            <div name="|" onClick={this.addNote}>
-              |
+                {this.signs.map(sign => {
+                  return (
+                    <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
+                      <div className="symbol">{sign[1]}</div>
+                    </div>
+                  );
+                })}
+                <div onClick={this.addDot}>
+                  <div className="symbol">.</div>
+                </div>
+              </div>
+              <div name="|" onClick={this.addNote}>
+                <div className="symbol">|</div>
+              </div>
+              <div
+                onClick={() => {
+                  if (this.state.userInput.length > 0) {
+                    this.setState({
+                      ...this.state,
+                      userInput: this.state.userInput.slice(0, -1)
+                    });
+                  }
+                }}
+              >
+                <div className="symbol">←</div>
+              </div>
             </div>
-            <div
-              onClick={() => {
-                if (this.state.userInput.length > 0) {
-                  this.setState({
-                    ...this.state,
-                    userInput: this.state.userInput.slice(0, -1)
-                  });
-                }
-              }}
-            >
-              ←
-            </div>
+            <button type="submit" onClick={this.onSubmit}>
+              Submit your answer
+            </button>
           </div>
-        </div>
-        <button type="submit" onClick={this.onSubmit}>
-          Submit your answer
-        </button>
+        )}
       </div>
     );
   }

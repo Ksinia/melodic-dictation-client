@@ -12,6 +12,10 @@ class MelodyDetailsPageContainer extends Component {
 
   state = { phase: "notStarted" };
 
+  changePhase = phase => {
+    this.setState({ phase: phase });
+  };
+
   play = async () => {
     await this.midiPlayer.stop();
     await this.midiPlayer.play({ url: baseUrl + this.props.melody.url });
@@ -34,6 +38,7 @@ class MelodyDetailsPageContainer extends Component {
         melody={this.props.melody}
         start={this.start}
         phase={this.state.phase}
+        changePhase={this.changePhase}
       />
     );
   }

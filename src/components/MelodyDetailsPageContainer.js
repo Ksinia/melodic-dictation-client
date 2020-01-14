@@ -3,7 +3,7 @@ import { loadMelody, clearMelodyDetails } from "../actions/melody";
 import { connect } from "react-redux";
 import MidiPlayer from "web-midi-player";
 import MelodyDetailsPage from "./MelodyDetailsPage";
-import { startDictation } from "../actions/dictation";
+import { startDictation, loadStats } from "../actions/dictation";
 import { url as baseUrl } from "../url";
 
 class MelodyDetailsPageContainer extends Component {
@@ -29,6 +29,10 @@ class MelodyDetailsPageContainer extends Component {
   componentDidMount() {
     this.props.dispatch(clearMelodyDetails());
     this.props.dispatch(loadMelody(this.melodyId));
+    if (this.props.user) {
+      console.log("load stats");
+      this.props.dispatch(loadStats(this.melodyId));
+    }
   }
 
   render() {
@@ -41,6 +45,7 @@ class MelodyDetailsPageContainer extends Component {
         phase={this.state.phase}
         changePhase={this.changePhase}
         user={this.props.user}
+        stats={this.props.stats}
       />
     );
   }
@@ -50,7 +55,8 @@ function mapStateToProps(state) {
   return {
     melody: state.melody,
     dictation: state.dictation,
-    user: state.user
+    user: state.user,
+    stats: state.stats
   };
 }
 

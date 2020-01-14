@@ -43,7 +43,32 @@ function MelodyDetailsPage(props) {
                     />
                   </div>
                 )}
-              <p>Your previous dictations with this melody:</p>
+              {props.stats && (
+                <div className="stats">
+                  {props.stats.all ? (
+                    <div>
+                      <p>You tried this melody {props.stats.all} times</p>
+                      {props.stats.finished ? (
+                        <div>
+                          <p>Completed {props.stats.finished} times</p>
+                          {props.stats.successful ? (
+                            <p>{props.stats.successful} times got 100%</p>
+                          ) : (
+                            <p>Didn't get 100% yet</p>
+                          )}
+                        </div>
+                      ) : (
+                        <p>Never completed</p>
+                      )}
+                    </div>
+                  ) : (
+                    <p>
+                      You didn't try this melody yet, it's good time to give it
+                      a try!
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           ) : (
             <p>Please log in to write dictation</p>

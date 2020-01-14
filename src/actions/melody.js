@@ -22,7 +22,6 @@ export const MELODY_LOADED = "MELODY_LOADED";
 
 export const loadMelody = melodyId => async dispatch => {
   const url = `${baseUrl}/melody/${melodyId}`;
-  console.log(url);
   try {
     const response = await superagent.get(url);
     console.log("response test:", response);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactAbcjs from "react-abcjs";
 import "./MusicInputForm.css";
-import { submitAnswer } from "../actions/dictation";
+import { submitAnswer, loadStats } from "../actions/dictation";
 
 class MusicInputFormContainer extends Component {
   initialState = {
@@ -161,6 +161,12 @@ class MusicInputFormContainer extends Component {
       this.props.phase === "started"
     ) {
       this.setState({ ...this.state, userInput: [] });
+    }
+    if (
+      this.props.phase !== prevProps.phase &&
+      this.props.phase === "finished"
+    ) {
+      this.props.dispatch(loadStats(this.props.melody.id));
     }
   }
 

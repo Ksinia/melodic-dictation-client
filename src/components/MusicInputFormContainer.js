@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactAbcjs from "react-abcjs";
 import "./MusicInputForm.css";
+import { submitAnswer } from "../actions/dictation";
 
 class MusicInputFormContainer extends Component {
   initialState = {
@@ -43,21 +44,19 @@ class MusicInputFormContainer extends Component {
   ];
 
   increasePitchOfLastNote = () => {
-    if (
-      this.state.userInput.length > 0 &&
-      this.state.userInput[this.state.userInput.length - 1] !== "|"
-    ) {
-      this.pitchesAndRegex.forEach((element, index, array) => {
-        const found = this.state.userInput[
-          this.state.userInput.length - 1
-        ].match(element[1]);
-        if (found && index < this.pitchesAndRegex.length - 1) {
+    const lastNote = this.state.userInput[this.state.userInput.length - 1];
+
+    if (this.state.userInput.length > 0 && lastNote !== "|") {
+      this.pitchesAndRegex.forEach((pitch, index, array) => {
+        const notReachHighestLine = index < this.pitchesAndRegex.length - 1;
+        const pitchOfLastNote = lastNote.match(pitch[1]);
+        if (pitchOfLastNote && notReachHighestLine) {
           this.setState({
             ...this.state,
             userInput: [
               ...this.state.userInput.slice(0, -1),
-              this.state.userInput[this.state.userInput.length - 1].replace(
-                found,
+              lastNote.replace(
+                pitchOfLastNote,
                 this.pitchesAndRegex[index + 1][0]
               )
             ]
@@ -67,21 +66,18 @@ class MusicInputFormContainer extends Component {
     }
   };
   decreasePitchOfLastNote = () => {
-    if (
-      this.state.userInput.length > 0 &&
-      this.state.userInput[this.state.userInput.length - 1] !== "|"
-    ) {
-      this.pitchesAndRegex.forEach((element, index, array) => {
-        const found = this.state.userInput[
-          this.state.userInput.length - 1
-        ].match(element[1]);
-        if (found && index > 0) {
+    const lastNote = this.state.userInput[this.state.userInput.length - 1];
+    if (this.state.userInput.length > 0 && lastNote !== "|") {
+      this.pitchesAndRegex.forEach((pitch, index, array) => {
+        const notReachLowestLine = index > 0;
+        const pitchOfLastNote = lastNote.match(pitch[1]);
+        if (pitchOfLastNote && notReachLowestLine) {
           this.setState({
             ...this.state,
             userInput: [
               ...this.state.userInput.slice(0, -1),
-              this.state.userInput[this.state.userInput.length - 1].replace(
-                found,
+              lastNote.replace(
+                pitchOfLastNote,
                 this.pitchesAndRegex[index - 1][0]
               )
             ]
@@ -93,76 +89,57 @@ class MusicInputFormContainer extends Component {
 
   addDot = () => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
+    let updatedLastNote = "";
     if (this.state.userInput.length > 0 && lastNote !== "|") {
       if (lastNote[lastNote.length - 1] !== ">") {
-        this.setState({
-          ...this.state,
-          userInput: [...this.state.userInput.slice(0, -1), lastNote + ">"]
-        });
+        updatedLastNote = lastNote + ">";
       } else {
-        this.setState({
-          ...this.state,
-          userInput: [
-            ...this.state.userInput.slice(0, -1),
-            lastNote.replace(">", "")
-          ]
-        });
+        updatedLastNote = lastNote.replace(">", "");
       }
+      this.setState({
+        ...this.state,
+        userInput: [...this.state.userInput.slice(0, -1), updatedLastNote]
+      });
     }
   };
 
   addSign = event => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
+    let updatedLastNote = "";
     const pressedSign = event.target.getAttribute("name");
     if (this.state.userInput.length > 0 && lastNote !== "|") {
       const existingSign = this.signs.find(sign => {
         return lastNote.includes(sign[0]);
       });
       if (existingSign && existingSign[0] !== pressedSign) {
-        this.setState({
-          ...this.state,
-          userInput: [
-            ...this.state.userInput.slice(0, -1),
-            lastNote.replace(existingSign[0], pressedSign)
-          ]
-        });
+        updatedLastNote = lastNote.replace(existingSign[0], pressedSign);
       } else if (existingSign && existingSign[0] === pressedSign) {
-        this.setState({
-          ...this.state,
-          userInput: [
-            ...this.state.userInput.slice(0, -1),
-            lastNote.replace(existingSign[0], "")
-          ]
-        });
+        updatedLastNote = lastNote.replace(existingSign[0], "");
       } else {
-        this.setState({
-          ...this.state,
-          userInput: [
-            ...this.state.userInput.slice(0, -1),
-            pressedSign + lastNote
-          ]
-        });
+        updatedLastNote = pressedSign + lastNote;
       }
+      this.setState({
+        ...this.state,
+        userInput: [...this.state.userInput.slice(0, -1), updatedLastNote]
+      });
     }
   };
 
   addNote = event => {
     let newState = { ...this.state };
-    if (newState.userInput.length > 0) {
-      newState.userInput[newState.userInput.length - 1] = newState.userInput[
-        newState.userInput.length - 1
-      ].replace("!mark!", "");
-    }
-    // if (event.target.getAttribute("name") !== "|") {
-    //   newState.userInput.push("!mark!" + event.target.getAttribute("name"));
-    // } else {
     newState.userInput.push(event.target.getAttribute("name"));
-    // }
     this.setState(newState);
   };
 
   onSubmit = event => {
     event.preventDefault();
+    this.dispatch(
+      submitAnswer(
+        this.props.melody.id,
+        this.props.dictation.id,
+        this.state.userInput
+      )
+    );
   };
 
   getMinimumNoteDuration(abcStart) {
@@ -194,6 +171,7 @@ class MusicInputFormContainer extends Component {
   render() {
     return (
       <div>
+        <p className="answerHeader">Your answer:</p>
         <ReactAbcjs
           key={1}
           abcNotation={
@@ -250,6 +228,9 @@ class MusicInputFormContainer extends Component {
             </div>
           </div>
         </div>
+        <button type="submit" onSubmit={this.onSubmit}>
+          Submit your answer
+        </button>
       </div>
     );
   }
@@ -257,7 +238,8 @@ class MusicInputFormContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    melody: state.melody
+    melody: state.melody,
+    dictation: state.dictation
   };
 }
 export default connect(mapStateToProps)(MusicInputFormContainer);

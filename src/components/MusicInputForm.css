@@ -25,3 +25,7 @@
   flex-flow: row wrap;
   vertical-align: middle;
 }
+.answerHeader {
+  text-align: left;
+  margin: auto auto auto 2em;
+}

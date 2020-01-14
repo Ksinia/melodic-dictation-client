@@ -36,9 +36,11 @@ class MelodyDetailsPageContainer extends Component {
       <MelodyDetailsPage
         play={this.play}
         melody={this.props.melody}
+        dictation={this.props.dictation}
         start={this.start}
         phase={this.state.phase}
         changePhase={this.changePhase}
+        user={this.props.user}
       />
     );
   }
@@ -46,7 +48,9 @@ class MelodyDetailsPageContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    melody: state.melody
+    melody: state.melody,
+    dictation: state.dictation,
+    user: state.user
   };
 }
 

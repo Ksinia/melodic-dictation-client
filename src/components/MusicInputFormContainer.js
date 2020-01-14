@@ -156,10 +156,6 @@ class MusicInputFormContainer extends Component {
   minNoteDuration = this.getMinimumNoteDuration(this.props.melody.abcStart);
 
   componentDidUpdate(prevProps) {
-    console.log("component did update");
-    console.log("this.props.phase", this.props.phase);
-    console.log("prevProps.phase", prevProps.phase);
-    // Typical usage (don't forget to compare props):
     if (
       this.props.phase !== prevProps.phase &&
       this.props.phase === "started"
@@ -179,7 +175,8 @@ class MusicInputFormContainer extends Component {
       ["E" + minNoteDuration / 1, "\ue1d2"],
       ["E" + minNoteDuration / 2, "\ue1d3"],
       ["E" + minNoteDuration / 4, "\ue1d5"],
-      ["E" + minNoteDuration / 8, "\ue1d7"]
+      // below we do not need to add number, because in abc notation E already means E1
+      ["E", "\ue1d7"]
     ];
     this.setState({ ...this.state, notes });
   }
@@ -209,7 +206,9 @@ class MusicInputFormContainer extends Component {
                 {this.state.notes.map(note => {
                   return (
                     <div key={note[1]} name={note[0]} onClick={this.addNote}>
-                      <div className="symbol">{note[1]}</div>
+                      <div className="symbol" name={note[0]}>
+                        {note[1]}
+                      </div>
                     </div>
                   );
                 })}
@@ -227,33 +226,41 @@ class MusicInputFormContainer extends Component {
                 {this.signs.map(sign => {
                   return (
                     <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
-                      <div className="symbol">{sign[1]}</div>
+                      <div className="symbol" name={sign[0]}>
+                        {sign[1]}
+                      </div>
                     </div>
                   );
                 })}
                 <div onClick={this.addDot}>
                   <div className="symbol">.</div>
                 </div>
-              </div>
-              <div name="|" onClick={this.addNote}>
-                <div className="symbol">|</div>
-              </div>
-              <div
-                onClick={() => {
-                  if (this.state.userInput.length > 0) {
-                    this.setState({
-                      ...this.state,
-                      userInput: this.state.userInput.slice(0, -1)
-                    });
-                  }
-                }}
-              >
-                <div className="symbol">←</div>
+                <div name="|" onClick={this.addNote}>
+                  <div className="symbol" name="|">
+                    |
+                  </div>
+                </div>
+                <div
+                  onClick={() => {
+                    if (this.state.userInput.length > 0) {
+                      this.setState({
+                        ...this.state,
+                        userInput: this.state.userInput.slice(0, -1)
+                      });
+                    }
+                  }}
+                >
+                  <div className="symbol">←</div>
+                </div>
               </div>
             </div>
-            <button type="submit" onClick={this.onSubmit}>
-              Submit your answer
-            </button>
+            {this.props.user ? (
+              <button type="submit" onClick={this.onSubmit}>
+                Submit your answer
+              </button>
+            ) : (
+              <p>Please log in to submit and check your result</p>
+            )}
           </div>
         )}
       </div>
@@ -264,7 +271,8 @@ class MusicInputFormContainer extends Component {
 function mapStateToProps(state) {
   return {
     melody: state.melody,
-    dictation: state.dictation
+    dictation: state.dictation,
+    user: state.user
   };
 }
 export default connect(mapStateToProps)(MusicInputFormContainer);

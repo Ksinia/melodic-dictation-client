@@ -131,9 +131,8 @@ class MusicInputFormContainer extends Component {
     this.setState(newState);
   };
 
-  onSubmit = event => {
-    event.preventDefault();
-    this.dispatch(
+  onSubmit = () => {
+    this.props.dispatch(
       submitAnswer(
         this.props.melody.id,
         this.props.dictation.id,
@@ -155,6 +154,7 @@ class MusicInputFormContainer extends Component {
   minNoteDuration = this.getMinimumNoteDuration(this.props.melody.abcStart);
 
   componentDidMount() {
+    this.setState(this.initialState);
     const minNoteDuration =
       this.props.melody &&
       this.getMinimumNoteDuration(this.props.melody.abcStart);
@@ -228,7 +228,7 @@ class MusicInputFormContainer extends Component {
             </div>
           </div>
         </div>
-        <button type="submit" onSubmit={this.onSubmit}>
+        <button type="submit" onClick={this.onSubmit}>
           Submit your answer
         </button>
       </div>

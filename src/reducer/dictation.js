@@ -1,8 +1,8 @@
-import { DICTATION_CREATED } from "../actions/dictation";
+import { DICTATION_FETCHED } from "../actions/dictation";
 
 export default function reducer(state = null, action = {}) {
   switch (action.type) {
-    case DICTATION_CREATED: {
+    case DICTATION_FETCHED: {
       return action.payload;
     }
     default:

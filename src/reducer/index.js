@@ -4,7 +4,6 @@ import error from "./error";
 import melodies from "./melodies";
 import melody from "./melody";
 import dictation from "./dictation";
-import dictations from "./dictations";
 import stats from "./stats";
 
 export default combineReducers({
@@ -13,6 +12,5 @@ export default combineReducers({
   melodies,
   melody,
   dictation,
-  dictations,
   stats
 });

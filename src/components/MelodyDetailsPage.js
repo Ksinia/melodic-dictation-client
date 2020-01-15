@@ -6,10 +6,9 @@ import MusicInputFormContainer from "./MusicInputFormContainer";
 function MelodyDetailsPage(props) {
   return (
     <div>
-      <h1>Melody details page</h1>
       {props.melody ? (
         <div>
-          <p>{props.melody.name}</p>
+          <h3>{props.melody.name}</h3>
           <button onClick={props.play}>Play</button>
 
           {props.user ? (

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactAbcjs from "react-abcjs";
-import ABCJS from "abcjs";
 import MusicInputFormContainer from "./MusicInputFormContainer";
 
 function MelodyDetailsPage(props) {
@@ -10,6 +9,18 @@ function MelodyDetailsPage(props) {
         <div>
           <h3>{props.melody.name}</h3>
           <button onClick={props.play}>Play</button>
+          <button
+            onClick={() =>
+              props.playAbc(
+                props.melody.abcStart +
+                  "\n" +
+                  props.melody.abcNotes.join(" ") +
+                  "|]"
+              )
+            }
+          >
+            Play user input
+          </button>
 
           {props.user ? (
             <div>

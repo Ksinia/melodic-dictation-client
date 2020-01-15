@@ -191,6 +191,7 @@ class MusicInputFormContainer extends Component {
       <div>
         <p className="answerHeader">Your answer:</p>
         <ReactAbcjs
+          className="usetInputSheet"
           key={1}
           abcNotation={
             this.props.melody.abcStart +
@@ -209,26 +210,41 @@ class MusicInputFormContainer extends Component {
                 className="notes"
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
+                {/* <img src={half} /> */}
+
                 {this.state.notes.map(note => {
                   return (
+                    // <div>
+                    //   <img
+                    //     key={note[1]}
+                    //     name={note[0]}
+                    //     onClick={this.addNote}
+                    //     src={half}
+                    //   />
                     <div key={note[1]} name={note[0]} onClick={this.addNote}>
                       <div className="symbol" name={note[0]}>
                         {note[1]}
                       </div>
+                      {/* </div> */}
                     </div>
                   );
                 })}
               </div>
               <div
-                className="otherSymbols"
+                className="arrows"
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
                 <div onClick={this.increasePitchOfLastNote}>
-                  <div className="symbol">⬆</div>
+                  <div className="symbol arrow">⬆</div>
                 </div>
                 <div onClick={this.decreasePitchOfLastNote}>
-                  <div className="symbol">⬇</div>
+                  <div className="symbol arrow">⬇</div>
                 </div>
+              </div>
+              <div
+                className="signs"
+                style={{ fontFamily: "Bravura", fontSize: 40 }}
+              >
                 {this.signs.map(sign => {
                   return (
                     <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
@@ -241,8 +257,13 @@ class MusicInputFormContainer extends Component {
                 <div onClick={this.addDot}>
                   <div className="symbol">.</div>
                 </div>
+              </div>
+              <div
+                className="rest"
+                style={{ fontFamily: "Bravura", fontSize: 40 }}
+              >
                 <div name="|" onClick={this.addNote}>
-                  <div className="symbol" name="|">
+                  <div className="symbol arrow" name="|">
                     |
                   </div>
                 </div>
@@ -256,7 +277,7 @@ class MusicInputFormContainer extends Component {
                     }
                   }}
                 >
-                  <div className="symbol">←</div>
+                  <div className="symbol arrow">←</div>
                 </div>
               </div>
             </div>

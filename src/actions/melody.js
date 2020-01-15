@@ -17,3 +17,28 @@ export const loadMelodies = () => async dispatch => {
     console.error();
   }
 };
+
+export const MELODY_LOADED = "MELODY_LOADED";
+
+export const loadMelody = melodyId => async dispatch => {
+  const url = `${baseUrl}/melody/${melodyId}`;
+  try {
+    const response = await superagent.get(url);
+    console.log("response test:", response);
+    const action = {
+      type: MELODY_LOADED,
+      payload: response.body
+    };
+    dispatch(action);
+  } catch (error) {
+    console.error();
+  }
+};
+
+export const CLEAR_MELODY = "CLEAR_MELODY";
+
+export function clearMelodyDetails() {
+  return {
+    type: CLEAR_MELODY
+  };
+}

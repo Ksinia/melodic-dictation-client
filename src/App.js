@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import LoginContainer from "./components/LoginContainer";
@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import MelodyListContainer from "./components/MelodyListContainer";
 import Toolbar from "./components/Toolbar";
 import Footer from "./components/Footer";
+import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
 
 class App extends Component {
   render() {
@@ -17,6 +18,12 @@ class App extends Component {
         <Switch>
           <Route path="/signup" component={SignupContainer} />
           <Route path="/login" component={LoginContainer} />
+          <Route
+            // exact
+            path="/melody/:melodyId"
+            component={MelodyDetailsPageContainer}
+          />
+          <Route path="/melody" component={MelodyListContainer} />
           <Route path="/" component={MelodyListContainer} />
         </Switch>
         <Footer />

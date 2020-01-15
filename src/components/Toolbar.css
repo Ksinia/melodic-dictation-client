@@ -1,7 +1,7 @@
 .toolbar {
   display: flex;
   width: 100%;
-  background-color: white;
+  background-color: whitesmoke;
   flex-flow: wrap;
   justify-content: space-evenly;
   padding: 0.8rem 0;
@@ -19,5 +19,5 @@
 
 a {
   color: black;
-  text-decoration: none;
+  /* text-decoration: none; */
 }

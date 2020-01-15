@@ -16,7 +16,7 @@ class Toolbar extends Component {
         <Link to="/melody">List of melodies</Link>
         {!this.props.user && <Link to="/signup">Sign up</Link>}
 
-        {this.props.user && <Link to="/account/">{this.props.user.name}</Link>}
+        {this.props.user && <span>Welcome {this.props.user.name}!</span>}
 
         {!this.props.user && <Link to="/login">Log in</Link>}
 

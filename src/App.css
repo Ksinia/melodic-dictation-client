@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   position: relative;
-  top: 60px;
+  padding-top: 40px;
 }
 
 .App-logo {
@@ -37,4 +37,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App::after {
+  content: "";
+  background: url("./piano-2592963_1920.jpg") no-repeat;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-size: 110vw;
 }

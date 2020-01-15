@@ -1,0 +1,84 @@
+.input {
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  padding: 0.5em;
+  width: fit-content;
+  height: fit-content;
+  justify-content: center;
+}
+
+.input div {
+  margin: 2px;
+}
+.input {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 60%;
+}
+
+.notes {
+  display: flex;
+  flex-flow: row wrap;
+  vertical-align: middle;
+  width: 20%;
+  justify-content: space-around;
+  margin: auto;
+}
+.arrows {
+  display: flex;
+  flex-flow: column;
+  vertical-align: middle;
+  width: fit-content;
+  justify-content: space-around;
+  margin: auto;
+}
+.signs {
+  display: flex;
+  flex-flow: row wrap;
+  vertical-align: middle;
+  width: 20%;
+  justify-content: space-around;
+  margin: auto;
+}
+.rest {
+  display: flex;
+  flex-flow: row wrap;
+  vertical-align: middle;
+  width: 25%;
+  justify-content: space-around;
+  margin: auto;
+}
+.answerHeader {
+  text-align: left;
+  margin: auto auto auto 2em;
+}
+.symbol {
+  border: 0.5px solid lightgrey;
+  border-radius: 5px;
+  padding: 0 0.3em 0 0.3em;
+  height: 1.8em;
+  background-color: whitesmoke;
+  line-height: 2.1em;
+  min-width: 45%;
+  overflow: hidden;
+  margin: auto;
+}
+.notes .symbol {
+  line-height: 2.5em;
+  width: 50%;
+}
+.signs .symbol {
+  line-height: 2em;
+  width: 50%;
+}
+.arrow {
+  line-height: 2.5em;
+}
+
+button {
+  padding: 0.5em;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  border: 0.5px solid lightgrey;
+}

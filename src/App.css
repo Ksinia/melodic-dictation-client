@@ -51,3 +51,11 @@
   z-index: -1;
   background-size: 110vw;
 }
+
+/* For Mobile */
+@media screen and (max-width: 670px) {
+  .App::after {
+    left: -80px;
+    background-size: 200vw;
+  }
+}

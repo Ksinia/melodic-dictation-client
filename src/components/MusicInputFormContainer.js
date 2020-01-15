@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import ReactAbcjs from "react-abcjs";
 import "./MusicInputForm.css";
 import { submitAnswer, loadStats } from "../actions/dictation";
+import MidiPlayer from "web-midi-player";
+import ABCJS from "abcjs/midi";
 
 class MusicInputFormContainer extends Component {
   initialState = {
@@ -12,6 +14,8 @@ class MusicInputFormContainer extends Component {
   };
 
   state = this.initialState;
+
+  midiPlayer = new MidiPlayer();
 
   pitchesAndRegex = [
     ["F,", /F,/],
@@ -42,6 +46,20 @@ class MusicInputFormContainer extends Component {
     ["_", "\ue260"],
     ["=", "\ue261"]
   ];
+
+  playAbc = async abcNotation => {
+    const tuneObjectArray = ABCJS.renderMidi(
+      "abc",
+      abcNotation,
+      {},
+      { generateInline: false, generateDownload: true },
+      {}
+    );
+    const myDiv = document.getElementById("abc");
+    const userInputMidiUrl = myDiv.children[0].children[0].getAttribute("href");
+    await this.midiPlayer.stop();
+    await this.midiPlayer.play({ url: userInputMidiUrl });
+  };
 
   increasePitchOfLastNote = () => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
@@ -205,6 +223,18 @@ class MusicInputFormContainer extends Component {
         />
         {this.props.phase === "started" && (
           <div>
+            <button
+              onClick={() =>
+                this.playAbc(
+                  this.state.original +
+                    "\n" +
+                    this.state.userInput.join(" ") +
+                    "|]"
+                )
+              }
+            >
+              Play user input
+            </button>
             <div className="input">
               <div
                 className="notes"

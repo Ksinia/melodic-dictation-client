@@ -9,19 +9,6 @@ function MelodyDetailsPage(props) {
         <div>
           <h3>{props.melody.name}</h3>
           <button onClick={props.play}>Play</button>
-          <button
-            onClick={() =>
-              props.playAbc(
-                props.melody.abcStart +
-                  "\n" +
-                  props.melody.abcNotes.join(" ") +
-                  "|]"
-              )
-            }
-          >
-            Play user input
-          </button>
-
           {props.user ? (
             <div>
               <button onClick={props.start}>Create new answer</button>

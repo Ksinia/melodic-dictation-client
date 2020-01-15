@@ -5,23 +5,10 @@ import MidiPlayer from "web-midi-player";
 import MelodyDetailsPage from "./MelodyDetailsPage";
 import { startDictation, loadStats } from "../actions/dictation";
 import { url as baseUrl } from "../url";
-import ABCJS from "abcjs/midi";
 
 class MelodyDetailsPageContainer extends Component {
   melodyId = this.props.match.params.melodyId;
   midiPlayer = new MidiPlayer();
-
-  playAbc = abcNotation => {
-    console.log(ABCJS);
-    const tuneObjectArray = ABCJS.renderMidi(
-      "abc",
-      abcNotation,
-      {},
-      { generateInline: false, generateDownload: true },
-      {}
-    );
-    console.log(tuneObjectArray);
-  };
 
   state = { phase: "notStarted" };
 
@@ -50,18 +37,19 @@ class MelodyDetailsPageContainer extends Component {
 
   render() {
     return (
-      <MelodyDetailsPage
-        id="abc"
-        play={this.play}
-        playAbc={this.playAbc}
-        melody={this.props.melody}
-        dictation={this.props.dictation}
-        start={this.start}
-        phase={this.state.phase}
-        changePhase={this.changePhase}
-        user={this.props.user}
-        stats={this.props.stats}
-      />
+      <div>
+        <MelodyDetailsPage
+          play={this.play}
+          melody={this.props.melody}
+          dictation={this.props.dictation}
+          start={this.start}
+          phase={this.state.phase}
+          changePhase={this.changePhase}
+          user={this.props.user}
+          stats={this.props.stats}
+        />
+        <div id="abc"></div>
+      </div>
     );
   }
 }

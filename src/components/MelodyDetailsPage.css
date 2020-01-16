@@ -1,7 +1,14 @@
-.topButtons {
+.top-buttons {
   display: flex;
   flex-flow: row;
+  justify-content: center;
 }
-.topButton {
-  margin: 0 0.5rem;
+.top-button {
+  margin: 0.5rem;
+}
+.ugly-button {
+  background-color: black;
+  color: whitesmoke;
+  border: none;
+  margin: 8px;
 }

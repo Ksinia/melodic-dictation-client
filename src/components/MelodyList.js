@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./MelodyList.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function MelodyList(props) {
   return [
@@ -15,12 +17,12 @@ function MelodyList(props) {
                 </Link>
                 <p>Popularity: {melody.dictationsCount}</p>
               </div>
-              <button
+              <div
                 className="play-button-in-list"
                 onClick={() => props.play(melody.url)}
               >
-                Play
-              </button>
+                <FontAwesomeIcon icon={faPlayCircle} size="2x" />
+              </div>
             </div>
           ))
         : "Loading..."}

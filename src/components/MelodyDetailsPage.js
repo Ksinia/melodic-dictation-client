@@ -2,6 +2,8 @@ import React from "react";
 import ReactAbcjs from "react-abcjs";
 import MusicInputFormContainer from "./MusicInputFormContainer";
 import "./MelodyDetailsPage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function MelodyDetailsPage(props) {
   return (
@@ -9,12 +11,12 @@ function MelodyDetailsPage(props) {
       {props.melody ? (
         <div>
           <h3>{props.melody.name}</h3>
-          <div className="tobButtons">
-            <button className="topButton" onClick={props.play}>
-              Play
-            </button>
+          <div className="top-buttons">
+            <div className="top-button" onClick={props.play}>
+              <FontAwesomeIcon icon={faPlayCircle} size="2x" />
+            </div>
             {props.user && (
-              <button className="topButton" onClick={props.start}>
+              <button className="top-button ugly-button" onClick={props.start}>
                 Create new answer
               </button>
             )}
@@ -44,7 +46,7 @@ function MelodyDetailsPage(props) {
                         "|]"
                       }
                       parserParams={{}}
-                      engraverParams={{ responsive: "resize" }}
+                      engraverParams={{ responsive: "resize", staffwidth: 650 }}
                       renderParams={{ viewportHorizontal: true }}
                     />
                   </div>

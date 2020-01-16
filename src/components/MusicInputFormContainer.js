@@ -219,20 +219,24 @@ class MusicInputFormContainer extends Component {
           engraverParams={{ responsive: "resize", staffwidth: 650 }}
           renderParams={{ viewportHorizontal: true }}
         />
+        {(this.props.phase === "started" ||
+          this.props.phase === "finished") && (
+          <button
+            className="ugly-button"
+            onClick={() =>
+              this.playAbc(
+                this.state.original +
+                  "\n" +
+                  this.state.userInput.join(" ") +
+                  "|]"
+              )
+            }
+          >
+            Play your answer
+          </button>
+        )}
         {this.props.phase === "started" && (
           <div>
-            <button
-              onClick={() =>
-                this.playAbc(
-                  this.state.original +
-                    "\n" +
-                    this.state.userInput.join(" ") +
-                    "|]"
-                )
-              }
-            >
-              Play user input
-            </button>
             <div className="input">
               <div
                 className="notes"
@@ -241,7 +245,7 @@ class MusicInputFormContainer extends Component {
                 {this.state.notes.map(note => {
                   return (
                     <div key={note[1]} name={note[0]} onClick={this.addNote}>
-                      <div className="symbol" name={note[0]}>
+                      <div className="symbol ugly-button" name={note[0]}>
                         {note[1]}
                       </div>
                     </div>
@@ -253,10 +257,10 @@ class MusicInputFormContainer extends Component {
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
                 <div onClick={this.increasePitchOfLastNote}>
-                  <div className="symbol arrow">⬆</div>
+                  <div className="symbol arrow ugly-button">⬆</div>
                 </div>
                 <div onClick={this.decreasePitchOfLastNote}>
-                  <div className="symbol arrow">⬇</div>
+                  <div className="symbol arrow ugly-button">⬇</div>
                 </div>
               </div>
               <div
@@ -266,14 +270,14 @@ class MusicInputFormContainer extends Component {
                 {this.signs.map(sign => {
                   return (
                     <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
-                      <div className="symbol" name={sign[0]}>
+                      <div className="symbol ugly-button" name={sign[0]}>
                         {sign[1]}
                       </div>
                     </div>
                   );
                 })}
                 <div onClick={this.addDot}>
-                  <div className="symbol">.</div>
+                  <div className="symbol ugly-button">.</div>
                 </div>
               </div>
               <div
@@ -281,7 +285,7 @@ class MusicInputFormContainer extends Component {
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
                 <div name="|" onClick={this.addNote}>
-                  <div className="symbol arrow" name="|">
+                  <div className="symbol arrow ugly-button" name="|">
                     |
                   </div>
                 </div>
@@ -295,12 +299,17 @@ class MusicInputFormContainer extends Component {
                     }
                   }}
                 >
-                  <div className="symbol arrow">←</div>
+                  <div className="symbol arrow ugly-button">←</div>
                 </div>
               </div>
             </div>
+
             {this.props.user ? (
-              <button type="submit" onClick={this.onSubmit}>
+              <button
+                className="ugly-button"
+                type="submit"
+                onClick={this.onSubmit}
+              >
                 Submit your answer
               </button>
             ) : (

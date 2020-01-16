@@ -20,7 +20,11 @@ class Toolbar extends Component {
 
         {!this.props.user && <Link to="/login">Log in</Link>}
 
-        {this.props.user && <span onClick={this.handleClick}>Log out</span>}
+        {this.props.user && (
+          <span className="logout" onClick={this.handleClick}>
+            Log out
+          </span>
+        )}
       </div>
     );
   }

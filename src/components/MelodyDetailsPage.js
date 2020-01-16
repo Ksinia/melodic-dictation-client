@@ -1,6 +1,7 @@
 import React from "react";
 import ReactAbcjs from "react-abcjs";
 import MusicInputFormContainer from "./MusicInputFormContainer";
+import "./MelodyDetailsPage.css";
 
 function MelodyDetailsPage(props) {
   return (
@@ -8,17 +9,25 @@ function MelodyDetailsPage(props) {
       {props.melody ? (
         <div>
           <h3>{props.melody.name}</h3>
-          <button onClick={props.play}>Play</button>
+          <div className="tobButtons">
+            <button className="topButton" onClick={props.play}>
+              Play
+            </button>
+            {props.user && (
+              <button className="topButton" onClick={props.start}>
+                Create new answer
+              </button>
+            )}
+          </div>
           {props.user ? (
             <div>
-              <button onClick={props.start}>Create new answer</button>
-              {(props.phase == "started" || props.phase == "finished") && (
+              {(props.phase === "started" || props.phase === "finished") && (
                 <MusicInputFormContainer
                   phase={props.phase}
                   changePhase={props.changePhase}
                 />
               )}
-              {props.phase == "finished" &&
+              {props.phase === "finished" &&
                 props.dictation &&
                 props.dictation.score !== null && (
                   <div className="result">

@@ -63,6 +63,7 @@
   min-width: 45%;
   overflow: hidden;
   margin: auto;
+  cursor: pointer;
 }
 .notes .symbol {
   line-height: 2.5em;
@@ -81,6 +82,8 @@ button {
   background-color: whitesmoke;
   border-radius: 5px;
   border: 0.5px solid lightgrey;
+  cursor: pointer;
+  font-size: medium;
 }
 
 #abc {

@@ -209,8 +209,6 @@ class MusicInputFormContainer extends Component {
       <div>
         <p className="answerHeader">Your answer:</p>
         <ReactAbcjs
-          className="usetInputSheet"
-          key={1}
           abcNotation={
             this.props.melody.abcStart +
             "\n" +
@@ -218,7 +216,7 @@ class MusicInputFormContainer extends Component {
             "|]"
           }
           parserParams={{}}
-          engraverParams={{ responsive: "resize" }}
+          engraverParams={{ responsive: "resize", staffwidth: 650 }}
           renderParams={{ viewportHorizontal: true }}
         />
         {this.props.phase === "started" && (
@@ -240,22 +238,12 @@ class MusicInputFormContainer extends Component {
                 className="notes"
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
-                {/* <img src={half} /> */}
-
                 {this.state.notes.map(note => {
                   return (
-                    // <div>
-                    //   <img
-                    //     key={note[1]}
-                    //     name={note[0]}
-                    //     onClick={this.addNote}
-                    //     src={half}
-                    //   />
                     <div key={note[1]} name={note[0]} onClick={this.addNote}>
                       <div className="symbol" name={note[0]}>
                         {note[1]}
                       </div>
-                      {/* </div> */}
                     </div>
                   );
                 })}

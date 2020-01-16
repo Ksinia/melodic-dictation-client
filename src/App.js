@@ -19,7 +19,7 @@ class App extends Component {
           <Route path="/signup" component={SignupContainer} />
           <Route path="/login" component={LoginContainer} />
           <Route
-            // exact
+            exact
             path="/melody/:melodyId"
             component={MelodyDetailsPageContainer}
           />

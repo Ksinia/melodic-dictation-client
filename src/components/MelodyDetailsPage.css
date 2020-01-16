@@ -1,0 +1,7 @@
+.topButtons {
+  display: flex;
+  flex-flow: row;
+}
+.topButton {
+  margin: 0 0.5rem;
+}

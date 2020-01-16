@@ -1,0 +1,19 @@
+.melody-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+.list-element {
+  min-width: 21%;
+  padding: 0.1rem 10rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+.play-button-in-list {
+  cursor: pointer;
+  height: fit-content;
+  margin: auto 0;
+}

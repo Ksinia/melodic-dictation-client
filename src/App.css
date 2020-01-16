@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  position: relative;
-  padding-top: 40px;
+  padding-top: 2.5rem;
+  padding-bottom: 2rem;
 }
 
 .App-logo {
@@ -52,10 +52,22 @@
   background-size: 110vw;
 }
 
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
 /* For Mobile */
 @media screen and (max-width: 670px) {
   .App::after {
     left: -80px;
     background-size: 200vw;
   }
+}
+
+.my-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2rem; /* Footer height */
 }

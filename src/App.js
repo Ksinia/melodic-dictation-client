@@ -12,8 +12,8 @@ import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer"
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
+    return [
+      <div className="App" key="app">
         <Toolbar />
         <Switch>
           <Route path="/signup" component={SignupContainer} />
@@ -26,9 +26,9 @@ class App extends Component {
           <Route path="/melody" component={MelodyListContainer} />
           <Route path="/" component={MelodyListContainer} />
         </Switch>
-        <Footer />
-      </div>
-    );
+      </div>,
+      <Footer key="footer" />
+    ];
   }
 }
 

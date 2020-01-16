@@ -48,7 +48,7 @@ class MusicInputFormContainer extends Component {
   ];
 
   playAbc = async abcNotation => {
-    const tuneObjectArray = ABCJS.renderMidi(
+    ABCJS.renderMidi(
       "abc",
       abcNotation,
       {},

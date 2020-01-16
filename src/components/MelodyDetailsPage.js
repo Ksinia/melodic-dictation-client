@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function MelodyDetailsPage(props) {
+  let replacedText = "";
+  if (props.melody) {
+    replacedText = props.melody.abcStart.replace(/Q:.*\nI:.*\n/, "");
+  }
   return (
     <div>
       {props.melody ? (
@@ -40,7 +44,8 @@ function MelodyDetailsPage(props) {
                     <ReactAbcjs
                       key={1}
                       abcNotation={
-                        props.melody.abcStart +
+                        replacedText +
+                        // props.melody.abcStart +
                         "\n" +
                         props.melody.abcNotes.join(" ") +
                         "|]"

@@ -205,15 +205,17 @@ class MusicInputFormContainer extends Component {
     this.setState({ ...this.state, notes });
   }
   render() {
+    let replacedText = "";
+    if (this.props.melody) {
+      replacedText = this.props.melody.abcStart.replace(/Q:.*\nI:.*\n/, "");
+    }
     return (
       <div>
         <p className="answerHeader">Your answer:</p>
         <ReactAbcjs
           abcNotation={
-            this.props.melody.abcStart +
-            "\n" +
-            this.state.userInput.join(" ") +
-            "|]"
+            // this.props.melody.abcStart +
+            replacedText + "\n" + this.state.userInput.join(" ") + "|]"
           }
           parserParams={{}}
           engraverParams={{ responsive: "resize", staffwidth: 650 }}

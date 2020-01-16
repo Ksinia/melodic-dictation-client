@@ -10,6 +10,7 @@
   flex-flow: row wrap;
   justify-content: space-between;
   vertical-align: middle;
+  text-align: left;
 }
 
 .play-button-in-list {

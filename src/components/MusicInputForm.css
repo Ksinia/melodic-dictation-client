@@ -3,7 +3,7 @@
   flex-flow: row wrap;
   margin: auto;
   padding: 0.5em;
-  width: fit-content;
+  /* width: fit-content; */
   height: fit-content;
   justify-content: center;
 }
@@ -22,7 +22,7 @@
   flex-flow: row wrap;
   vertical-align: middle;
   width: 20%;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin: auto;
 }
 .arrows {
@@ -49,10 +49,10 @@
   justify-content: space-around;
   margin: auto;
 }
-.answerHeader {
+/* .answerHeader {
   text-align: left;
   margin: auto auto auto 2em;
-}
+} */
 .symbol {
   border: 0.5px solid lightgrey;
   border-radius: 5px;
@@ -88,4 +88,10 @@ button {
 
 #abc {
   display: none;
+}
+.abcjs-staff {
+  justify-content: left;
+}
+.abcjs-l0 {
+  align-self: flex-start;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReactAbcjs from "react-abcjs";
+import ReactAbcjs from "./react-abcjs.js";
 import "./MusicInputForm.css";
 import { submitAnswer, loadStats } from "../actions/dictation";
 import MidiPlayer from "web-midi-player";
@@ -205,6 +205,7 @@ class MusicInputFormContainer extends Component {
     this.setState({ ...this.state, notes });
   }
   render() {
+    const width = Math.min(700, window.innerWidth - 30);
     let replacedText = "";
     if (this.props.melody) {
       replacedText = this.props.melody.abcStart.replace(/Q:.*\nI:.*\n/, "");
@@ -212,15 +213,27 @@ class MusicInputFormContainer extends Component {
     return (
       <div>
         <p className="answerHeader">Your answer:</p>
-        <ReactAbcjs
-          abcNotation={
-            // this.props.melody.abcStart +
-            replacedText + "\n" + this.state.userInput.join(" ") + "|]"
-          }
-          parserParams={{}}
-          engraverParams={{ responsive: "resize", staffwidth: 650 }}
-          renderParams={{ viewportHorizontal: true }}
-        />
+        <div style={{ width: width + 30, margin: "auto", textAlign: "left" }}>
+          <ReactAbcjs
+            abcNotation={
+              // this.props.melody.abcStart +
+              replacedText + "\n" + this.state.userInput.join(" ") + "|]"
+            }
+            parserParams={{
+              wrap: {
+                minSpacing: 0.8,
+                maxSpacing: 1.8,
+                preferredMeasuresPerLine: 4
+              }
+            }}
+            engraverParams={{
+              staffwidth: width,
+              scale: 1.3,
+              add_classes: true
+            }}
+            renderParams={{}}
+          />
+        </div>
         {(this.props.phase === "started" ||
           this.props.phase === "finished") && (
           <button
@@ -239,7 +252,7 @@ class MusicInputFormContainer extends Component {
         )}
         {this.props.phase === "started" && (
           <div>
-            <div className="input">
+            <div className="input" style={{ width: width }}>
               <div
                 className="notes"
                 style={{ fontFamily: "Bravura", fontSize: 40 }}

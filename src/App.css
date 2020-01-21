@@ -42,6 +42,7 @@
 .App::after {
   content: "";
   background: url("./piano-2592963_1920.jpg") no-repeat;
+  background-color: rgb(79, 76, 80);
   opacity: 0.5;
   top: 0;
   left: 0;

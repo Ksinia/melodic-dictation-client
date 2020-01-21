@@ -1,5 +1,5 @@
 import React from "react";
-import ReactAbcjs from "react-abcjs";
+import ReactAbcjs from "./react-abcjs.js";
 import MusicInputFormContainer from "./MusicInputFormContainer";
 import "./MelodyDetailsPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,9 +50,18 @@ function MelodyDetailsPage(props) {
                         props.melody.abcNotes.join(" ") +
                         "|]"
                       }
-                      parserParams={{}}
-                      engraverParams={{ responsive: "resize", staffwidth: 650 }}
-                      renderParams={{ viewportHorizontal: true }}
+                      parserParams={{
+                        wrap: {
+                          minSpacing: 0.8,
+                          maxSpacing: 1.8,
+                          preferredMeasuresPerLine: 4
+                        }
+                      }}
+                      engraverParams={{
+                        staffwidth: Math.min(800, window.innerWidth - 30),
+                        scale: 1.3
+                      }}
+                      renderParams={{}}
                     />
                   </div>
                 )}

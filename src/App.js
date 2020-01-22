@@ -8,11 +8,14 @@ import MelodyListContainer from "./components/MelodyListContainer";
 import Toolbar from "./components/Toolbar";
 import Footer from "./components/Footer";
 import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
+import GithubCorner from "react-github-corner";
 
 class App extends Component {
   render() {
     return [
       <div className="App" key="app">
+        <GithubCorner href="https://github.com/Ksinia/melodic-dictation-client" />
+
         <Toolbar />
         <Switch>
           <Route path="/signup" component={SignupContainer} />

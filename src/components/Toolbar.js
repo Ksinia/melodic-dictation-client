@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logOut } from "../actions/authorization";
 import "./Toolbar.css";
-import GithubCorner from "react-github-corner";
 
 class Toolbar extends Component {
   handleClick = () => {
@@ -14,8 +13,6 @@ class Toolbar extends Component {
   render() {
     return (
       <div className="toolbar">
-        <GithubCorner href="https://github.com/Ksinia/melodic-dictation-client" />
-
         <Link to="/melody">List of melodies</Link>
         {!this.props.user && <Link to="/signup">Sign up</Link>}
 

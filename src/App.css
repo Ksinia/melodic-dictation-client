@@ -74,4 +74,5 @@
 }
 .github-corner svg {
   padding-top: 2.5rem;
+  box-sizing: initial;
 }

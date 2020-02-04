@@ -30,7 +30,6 @@ class MelodyDetailsPageContainer extends Component {
     this.props.dispatch(clearMelodyDetails());
     this.props.dispatch(loadMelody(this.melodyId));
     if (this.props.user) {
-      console.log("load stats");
       this.props.dispatch(loadStats(this.melodyId));
     }
   }

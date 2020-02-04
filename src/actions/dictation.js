@@ -62,7 +62,6 @@ export const STATS_FETCHED = "STATS_FETCHED";
 
 export const loadStats = melodyId => async (dispatch, getState) => {
   const url = `${baseUrl}/melody/${melodyId}/stats`;
-  console.log("load stats");
   try {
     const response = await superagent
       .get(url)

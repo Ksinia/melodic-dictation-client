@@ -4,6 +4,8 @@ import MusicInputFormContainer from "./MusicInputFormContainer";
 import "./MelodyDetailsPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import MelodyListContainer from "./MelodyListContainer";
+import { isSafari, isIOS } from "react-device-detect";
 
 function MelodyDetailsPage(props) {
   let replacedText = "";
@@ -14,9 +16,24 @@ function MelodyDetailsPage(props) {
     <div>
       {props.melody ? (
         <div>
+          <div className="abc" id={"abc" + props.melody.id}></div>
           <h3>{props.melody.name}</h3>
           <div className="top-buttons">
-            <div className="top-button" onClick={props.play}>
+            <div
+              className="top-button"
+              onClick={
+                isIOS || isSafari
+                  ? () =>
+                      MelodyListContainer.playSynth(
+                        props.melody.abcStart +
+                          "\n" +
+                          props.melody.abcNotes.join(" "),
+                        props.melody.id,
+                        props.midiBuffer
+                      )
+                  : () => props.play(props.melody.url)
+              }
+            >
               <FontAwesomeIcon icon={faPlayCircle} size="2x" />
             </div>
             {props.user && (

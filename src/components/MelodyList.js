@@ -26,7 +26,8 @@ function MelodyList(props) {
                     ? () =>
                         props.playSynth(
                           melody.abcStart + "\n" + melody.abcNotes.join(" "),
-                          melody.id
+                          melody.id,
+                          props.midiBuffer
                         )
                     : () => props.play(melody.url)
                 }

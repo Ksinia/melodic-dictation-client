@@ -28,7 +28,6 @@ export const loginSignupFunction = (
   const url = `${baseUrl}/${type}`;
   try {
     const response = await superagent.post(url).send({ name, password });
-    console.log("response test:", response);
     const action = JSON.parse(response.text);
     dispatch(action);
     // dispatch the action that there is no errors

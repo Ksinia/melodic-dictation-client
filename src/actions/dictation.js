@@ -10,7 +10,6 @@ export const startDictation = melodyId => async (dispatch, getState) => {
       .post(url)
       .set("Authorization", `Bearer ${getState().user.jwt}`)
       .send(melodyId);
-    console.log("response test:", response);
     const action = {
       type: DICTATION_FETCHED,
       payload: response.body
@@ -32,7 +31,6 @@ export const submitAnswer = (melodyId, dictationId, userInput) => async (
       .put(url)
       .set("Authorization", `Bearer ${getState().user.jwt}`)
       .send(userInputObject);
-    console.log("response test:", response);
     const action = {
       type: DICTATION_FETCHED,
       payload: response.body
@@ -51,7 +49,6 @@ export const loadDictations = melodyId => async (dispatch, getState) => {
     const response = await superagent
       .get(url)
       .set("Authorization", `Bearer ${getState().user.jwt}`);
-    console.log("response test:", response);
     const action = {
       type: PREVIOUS_DICTATIONS_FETCHED,
       payload: response.body
@@ -70,7 +67,6 @@ export const loadStats = melodyId => async (dispatch, getState) => {
     const response = await superagent
       .get(url)
       .set("Authorization", `Bearer ${getState().user.jwt}`);
-    console.log("response test:", response);
     const action = {
       type: STATS_FETCHED,
       payload: response.body

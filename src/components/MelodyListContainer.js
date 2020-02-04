@@ -11,22 +11,17 @@ class MelodyListContainer extends Component {
 
   playSynth = async (abcNotation, melodyId) => {
     if (ABCJS.synth.supportsAudio()) {
-      var visualObj = await ABCJS.renderAbc("abc" + melodyId, abcNotation)[0];
-      const midiBuffer = new ABCJS.synth.CreateSynth();
-      await midiBuffer
-        .init({
-          visualObj: visualObj,
-          soundFontUrl: "http://gleitz.github.io/midi-js-soundfonts/MusyngKite/"
-        })
-        .then(function() {
-          // midiBuffer.prime actually builds the output buffer.
-          return midiBuffer.prime();
-        })
-        .then(function() {
-          // At this point, everything slow has happened. midiBuffer.start will return very quickly and will start playing very quickly without lag.
-          midiBuffer.start();
-          return Promise.resolve();
-        });
+      const visualObj = await ABCJS.renderAbc("abc" + melodyId, abcNotation)[0];
+
+      await this.midiBuffer.stop();
+      await this.midiBuffer.init({
+        visualObj: visualObj,
+        soundFontUrl: "http://gleitz.github.io/midi-js-soundfonts/MusyngKite/"
+      });
+      // midiBuffer.prime actually builds the output buffer.
+      await this.midiBuffer.prime();
+      // At this point, everything slow has happened. midiBuffer.start will return very quickly and will start playing very quickly without lag.
+      await this.midiBuffer.start();
     }
   };
 
@@ -37,6 +32,9 @@ class MelodyListContainer extends Component {
 
   componentDidMount() {
     this.props.dispatch(loadMelodies());
+    if (ABCJS.synth.supportsAudio()) {
+      this.midiBuffer = new ABCJS.synth.CreateSynth();
+    }
   }
   render() {
     return (

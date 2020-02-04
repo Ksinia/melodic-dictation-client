@@ -69,7 +69,7 @@ function MelodyDetailsPage(props) {
                 <div className="stats">
                   {props.stats.all ? (
                     <div>
-                      {props.stats.all == 1 ? (
+                      {props.stats.all === 1 ? (
                         <p>You tried this melody {props.stats.all} time</p>
                       ) : (
                         <p>You tried this melody {props.stats.all} times</p>
@@ -77,14 +77,14 @@ function MelodyDetailsPage(props) {
 
                       {props.stats.finished ? (
                         <div>
-                          {props.stats.finished == 1 ? (
+                          {props.stats.finished === 1 ? (
                             <p>Completed {props.stats.finished} time</p>
                           ) : (
                             <p>Completed {props.stats.finished} times</p>
                           )}
 
                           {props.stats.successful ? (
-                            props.stats.successful == 1 ? (
+                            props.stats.successful === 1 ? (
                               <p>{props.stats.successful} time got 100%</p>
                             ) : (
                               <p>{props.stats.successful} times got 100%</p>

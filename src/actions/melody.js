@@ -7,7 +7,6 @@ export const loadMelodies = () => async dispatch => {
   const url = `${baseUrl}/melody`;
   try {
     const response = await superagent.get(url);
-    console.log("response test:", response);
     const action = {
       type: MELODIES_LOADED,
       payload: response.body
@@ -24,7 +23,6 @@ export const loadMelody = melodyId => async dispatch => {
   const url = `${baseUrl}/melody/${melodyId}`;
   try {
     const response = await superagent.get(url);
-    console.log("response test:", response);
     const action = {
       type: MELODY_LOADED,
       payload: response.body

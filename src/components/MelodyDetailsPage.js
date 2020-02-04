@@ -1,9 +1,11 @@
 import React from "react";
-import ReactAbcjs from "./react-abcjs.js";
+import ReactAbcjs from "react-abcjs";
 import MusicInputFormContainer from "./MusicInputFormContainer";
 import "./MelodyDetailsPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import MelodyListContainer from "./MelodyListContainer";
+import { isSafari, isIOS } from "react-device-detect";
 
 function MelodyDetailsPage(props) {
   let replacedText = "";
@@ -14,9 +16,24 @@ function MelodyDetailsPage(props) {
     <div>
       {props.melody ? (
         <div>
+          <div className="abc" id={"abc" + props.melody.id}></div>
           <h3>{props.melody.name}</h3>
           <div className="top-buttons">
-            <div className="top-button" onClick={props.play}>
+            <div
+              className="top-button"
+              onClick={
+                isIOS || isSafari
+                  ? () =>
+                      MelodyListContainer.playSynth(
+                        props.melody.abcStart +
+                          "\n" +
+                          props.melody.abcNotes.join(" "),
+                        props.melody.id,
+                        props.midiBuffer
+                      )
+                  : () => props.play(props.melody.url)
+              }
+            >
               <FontAwesomeIcon icon={faPlayCircle} size="2x" />
             </div>
             {props.user && (
@@ -69,7 +86,7 @@ function MelodyDetailsPage(props) {
                 <div className="stats">
                   {props.stats.all ? (
                     <div>
-                      {props.stats.all == 1 ? (
+                      {props.stats.all === 1 ? (
                         <p>You tried this melody {props.stats.all} time</p>
                       ) : (
                         <p>You tried this melody {props.stats.all} times</p>
@@ -77,14 +94,14 @@ function MelodyDetailsPage(props) {
 
                       {props.stats.finished ? (
                         <div>
-                          {props.stats.finished == 1 ? (
+                          {props.stats.finished === 1 ? (
                             <p>Completed {props.stats.finished} time</p>
                           ) : (
                             <p>Completed {props.stats.finished} times</p>
                           )}
 
                           {props.stats.successful ? (
-                            props.stats.successful == 1 ? (
+                            props.stats.successful === 1 ? (
                               <p>{props.stats.successful} time got 100%</p>
                             ) : (
                               <p>{props.stats.successful} times got 100%</p>

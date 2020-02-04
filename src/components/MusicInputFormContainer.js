@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReactAbcjs from "./react-abcjs.js";
+import ReactAbcjs from "react-abcjs";
 import "./MusicInputForm.css";
 import { submitAnswer, loadStats } from "../actions/dictation";
 import MidiPlayer from "web-midi-player";
-import ABCJS from "abcjs/midi";
+import AbcjsMidi from "abcjs/midi";
+import ABCJS from "abcjs";
+import MelodyListContainer from "./MelodyListContainer";
+import { isSafari, isIOS } from "react-device-detect";
 
 class MusicInputFormContainer extends Component {
   initialState = {
@@ -16,6 +19,7 @@ class MusicInputFormContainer extends Component {
   state = this.initialState;
 
   midiPlayer = new MidiPlayer();
+  midiBuffer = ABCJS.synth.supportsAudio() && new ABCJS.synth.CreateSynth();
 
   pitchesAndRegex = [
     ["F,", /F,/],
@@ -48,7 +52,7 @@ class MusicInputFormContainer extends Component {
   ];
 
   playAbc = async abcNotation => {
-    ABCJS.renderMidi(
+    AbcjsMidi.renderMidi(
       "abc",
       abcNotation,
       {},
@@ -238,13 +242,22 @@ class MusicInputFormContainer extends Component {
           this.props.phase === "finished") && (
           <button
             className="ugly-button"
-            onClick={() =>
-              this.playAbc(
-                this.state.original +
-                  "\n" +
-                  this.state.userInput.join(" ") +
-                  "|]"
-              )
+            onClick={
+              isIOS || isSafari
+                ? () =>
+                    MelodyListContainer.playSynth(
+                      this.state.original +
+                        "\n" +
+                        this.state.userInput.join(" "),
+                      this.props.melody.id,
+                      this.midiBuffer
+                    )
+                : () =>
+                    this.playAbc(
+                      this.state.original +
+                        "\n" +
+                        this.state.userInput.join(" ")
+                    )
             }
           >
             Play your answer

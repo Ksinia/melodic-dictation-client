@@ -5,10 +5,12 @@ import MidiPlayer from "web-midi-player";
 import MelodyDetailsPage from "./MelodyDetailsPage";
 import { startDictation, loadStats } from "../actions/dictation";
 import { url as baseUrl } from "../url";
+import ABCJS from "abcjs";
 
 class MelodyDetailsPageContainer extends Component {
   melodyId = this.props.match.params.melodyId;
   midiPlayer = new MidiPlayer();
+  midiBuffer = ABCJS.synth.supportsAudio() && new ABCJS.synth.CreateSynth();
 
   state = { phase: "notStarted" };
 
@@ -30,7 +32,6 @@ class MelodyDetailsPageContainer extends Component {
     this.props.dispatch(clearMelodyDetails());
     this.props.dispatch(loadMelody(this.melodyId));
     if (this.props.user) {
-      console.log("load stats");
       this.props.dispatch(loadStats(this.melodyId));
     }
   }
@@ -47,6 +48,7 @@ class MelodyDetailsPageContainer extends Component {
           changePhase={this.changePhase}
           user={this.props.user}
           stats={this.props.stats}
+          midiBuffer={this.midiBuffer}
         />
         <div id="abc"></div>
       </div>

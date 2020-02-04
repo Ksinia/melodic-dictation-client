@@ -1,5 +1,5 @@
 import React from "react";
-import ReactAbcjs from "./react-abcjs.js";
+import ReactAbcjs from "react-abcjs";
 import MusicInputFormContainer from "./MusicInputFormContainer";
 import "./MelodyDetailsPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

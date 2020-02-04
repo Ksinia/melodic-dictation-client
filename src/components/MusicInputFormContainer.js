@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReactAbcjs from "./react-abcjs.js";
+import ReactAbcjs from "react-abcjs";
 import "./MusicInputForm.css";
 import { submitAnswer, loadStats } from "../actions/dictation";
 import MidiPlayer from "web-midi-player";

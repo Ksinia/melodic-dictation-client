@@ -23,7 +23,7 @@
     "redux-thunk": "^2.3.0",
     "superagent": "^5.2.1",
     "typescript": "^3.7.5",
-    "web-midi-player": "^1.2.0"
+    "web-midi-player": "^1.1.23"
   },
   "scripts": {
     "start": "react-scripts start",

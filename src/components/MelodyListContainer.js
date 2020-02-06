@@ -17,7 +17,7 @@ class MelodyListContainer extends Component {
       await midiBuffer.stop();
       await midiBuffer.init({
         visualObj: visualObj,
-        soundFontUrl: "http://gleitz.github.io/midi-js-soundfonts/MusyngKite/"
+        soundFontUrl: "https://gleitz.github.io/midi-js-soundfonts/MusyngKite/"
       });
       // midiBuffer.prime actually builds the output buffer.
       await midiBuffer.prime();

@@ -51,6 +51,7 @@
   position: absolute;
   z-index: -1;
   background-size: 130vw;
+  background-attachment: fixed;
 }
 
 #root {
@@ -61,8 +62,22 @@
 /* For Mobile */
 @media screen and (max-width: 670px) {
   .App::after {
-    left: -80px;
-    background-size: 200vw;
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    /* width: 100%; */
+    /* height: 100%; */
+    z-index: -10;
+    background: url("./piano-2592963_1920.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* left: rem; */
+    /* background-attachment: fixed; */
+    background-size: 300vw;
   }
 }
 

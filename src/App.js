@@ -9,6 +9,7 @@ import Toolbar from "./components/Toolbar";
 import Footer from "./components/Footer";
 import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
 import GithubCorner from "react-github-corner";
+import UserPageContainer from "./components/UserPageContainer";
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
             component={MelodyDetailsPageContainer}
           />
           <Route path="/melody" component={MelodyListContainer} />
+          <Route path="/me" component={UserPageContainer} />
           <Route path="/" component={MelodyListContainer} />
         </Switch>
       </div>,

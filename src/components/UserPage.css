@@ -1,0 +1,9 @@
+.my-list {
+  display: flex;
+  flex-flow: column;
+}
+
+/* .my-melody-list-element {
+  display: flex;
+  flex-flow: row wrap;
+} */

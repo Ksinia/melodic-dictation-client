@@ -2,79 +2,65 @@
   display: flex;
   flex-flow: row wrap;
   margin: auto;
-  padding: 0.5em;
-  /* width: fit-content; */
-  height: fit-content;
   justify-content: center;
-}
-
-.input div {
-  margin: 2px;
-}
-.input {
-  display: flex;
-  flex-flow: row wrap;
-  max-width: 60%;
+  max-width: 20rem;
 }
 
 .notes {
   display: flex;
   flex-flow: row wrap;
   vertical-align: middle;
-  width: 20%;
+  width: 7rem;
   justify-content: space-evenly;
-  margin: auto;
 }
 .arrows {
   display: flex;
   flex-flow: column;
   vertical-align: middle;
-  width: fit-content;
+  width: 2.5;
   justify-content: space-around;
-  margin: auto;
 }
 .signs {
   display: flex;
   flex-flow: row wrap;
   vertical-align: middle;
-  width: 20%;
-  justify-content: space-around;
-  margin: auto;
+  width: 7rem;
+  justify-content: space-evenly;
 }
 .rest {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column;
   vertical-align: middle;
-  width: 25%;
-  justify-content: space-around;
-  margin: auto;
+  width: fit-content;
+  justify-content: space-evenly;
 }
-/* .answerHeader {
-  text-align: left;
-  margin: auto auto auto 2em;
-} */
+
 .symbol {
   border: 0.5px solid lightgrey;
   border-radius: 5px;
-  padding: 0 0.3em 0 0.3em;
-  height: 1.8em;
+  padding: 0;
   background-color: whitesmoke;
   line-height: 2.1em;
-  min-width: 45%;
   overflow: hidden;
-  margin: auto;
+  margin: 0.1rem 0 0.1rem 0;
   cursor: pointer;
+  width: 2.9rem;
+  height: 4rem;
+  background-color: black;
+  color: whitesmoke;
+  border: none;
 }
 .notes .symbol {
-  line-height: 2.5em;
-  width: 50%;
+  line-height: 2.3em;
 }
 .signs .symbol {
-  line-height: 2em;
-  width: 50%;
+  line-height: 1.7em;
 }
 .arrow {
-  line-height: 2.5em;
+  line-height: 2.2em;
+}
+.arrows .symbol {
+  line-height: 1.25em;
 }
 
 button {

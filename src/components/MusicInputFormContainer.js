@@ -273,22 +273,19 @@ class MusicInputFormContainer extends Component {
                 {this.state.notes.map(note => {
                   return (
                     <div key={note[1]} name={note[0]} onClick={this.addNote}>
-                      <div className="symbol ugly-button" name={note[0]}>
+                      <div className="symbol" name={note[0]}>
                         {note[1]}
                       </div>
                     </div>
                   );
                 })}
               </div>
-              <div
-                className="arrows"
-                style={{ fontFamily: "Bravura", fontSize: 40 }}
-              >
+              <div className="arrows" style={{ fontSize: 50 }}>
                 <div onClick={this.increasePitchOfLastNote}>
-                  <div className="symbol arrow ugly-button">⬆</div>
+                  <div className="symbol arrow">⭡</div>
                 </div>
                 <div onClick={this.decreasePitchOfLastNote}>
-                  <div className="symbol arrow ugly-button">⬇</div>
+                  <div className="symbol arrow">⭣</div>
                 </div>
               </div>
               <div
@@ -298,22 +295,22 @@ class MusicInputFormContainer extends Component {
                 {this.signs.map(sign => {
                   return (
                     <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
-                      <div className="symbol ugly-button" name={sign[0]}>
+                      <div className="symbol" name={sign[0]}>
                         {sign[1]}
                       </div>
                     </div>
                   );
                 })}
                 <div onClick={this.addDot}>
-                  <div className="symbol ugly-button">.</div>
+                  <div className="symbol">.</div>
                 </div>
               </div>
               <div
                 className="rest"
-                style={{ fontFamily: "Bravura", fontSize: 40 }}
+                style={{ fontFamily: "Arial", fontSize: 30 }}
               >
                 <div name="|" onClick={this.addNote}>
-                  <div className="symbol arrow ugly-button" name="|">
+                  <div className="symbol" name="|">
                     |
                   </div>
                 </div>
@@ -327,7 +324,7 @@ class MusicInputFormContainer extends Component {
                     }
                   }}
                 >
-                  <div className="symbol arrow ugly-button">←</div>
+                  <div className="symbol arrow">⭠</div>
                 </div>
               </div>
             </div>

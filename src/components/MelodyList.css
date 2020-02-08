@@ -1,20 +1,23 @@
 .melody-list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 .list-element {
-  min-width: 21%;
-  padding: 0.1rem 10rem;
+  padding: 0.1rem;
   display: flex;
-  flex-flow: row wrap;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
+  margin: auto 2rem;
+  flex-flow: row wrap;
   vertical-align: middle;
   text-align: left;
+  width: 15rem;
 }
 
 .play-button-in-list {
   cursor: pointer;
   height: fit-content;
-  margin: auto 0;
+  margin: auto 0.5rem;
 }

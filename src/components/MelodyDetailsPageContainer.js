@@ -4,23 +4,15 @@ import { connect } from "react-redux";
 import MidiPlayer from "web-midi-player";
 import MelodyDetailsPage from "./MelodyDetailsPage";
 import { startDictation, loadStats } from "../actions/dictation";
-import { url as baseUrl } from "../url";
-import ABCJS from "abcjs";
 
 class MelodyDetailsPageContainer extends Component {
   melodyId = this.props.match.params.melodyId;
   midiPlayer = new MidiPlayer();
-  midiBuffer = ABCJS.synth.supportsAudio() && new ABCJS.synth.CreateSynth();
 
   state = { phase: "notStarted" };
 
   changePhase = phase => {
     this.setState({ phase: phase });
-  };
-
-  play = async () => {
-    await this.midiPlayer.stop();
-    await this.midiPlayer.play({ url: baseUrl + this.props.melody.url });
   };
 
   start = () => {
@@ -40,7 +32,6 @@ class MelodyDetailsPageContainer extends Component {
     return (
       <div>
         <MelodyDetailsPage
-          play={this.play}
           melody={this.props.melody}
           dictation={this.props.dictation}
           start={this.start}
@@ -48,7 +39,7 @@ class MelodyDetailsPageContainer extends Component {
           changePhase={this.changePhase}
           user={this.props.user}
           stats={this.props.stats}
-          midiBuffer={this.midiBuffer}
+          midiPlayer={this.midiPlayer}
         />
         <div id="abc"></div>
       </div>

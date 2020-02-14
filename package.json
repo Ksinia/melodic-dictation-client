@@ -10,7 +10,7 @@
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
-    "abcjs": "^5.10.3",
+    "abcjs": "github:paulrosen/abcjs#master",
     "react": "^16.12.0",
     "react-abcjs": "^0.1.3",
     "react-device-detect": "^1.11.14",
@@ -23,7 +23,7 @@
     "redux-thunk": "^2.3.0",
     "superagent": "^5.2.1",
     "typescript": "^3.7.5",
-    "web-midi-player": "^1.1.23"
+    "web-midi-player": "^1.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

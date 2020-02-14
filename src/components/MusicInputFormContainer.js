@@ -4,10 +4,7 @@ import ReactAbcjs from "react-abcjs";
 import "./MusicInputForm.css";
 import { submitAnswer, loadStats } from "../actions/dictation";
 import MidiPlayer from "web-midi-player";
-import AbcjsMidi from "abcjs/midi";
-import ABCJS from "abcjs";
-import MelodyListContainer from "./MelodyListContainer";
-import { isSafari, isIOS } from "react-device-detect";
+import play from "./functions/play";
 
 class MusicInputFormContainer extends Component {
   initialState = {
@@ -19,7 +16,6 @@ class MusicInputFormContainer extends Component {
   state = this.initialState;
 
   midiPlayer = new MidiPlayer();
-  midiBuffer = ABCJS.synth.supportsAudio() && new ABCJS.synth.CreateSynth();
 
   pitchesAndRegex = [
     ["F,", /F,/],
@@ -50,20 +46,6 @@ class MusicInputFormContainer extends Component {
     ["_", "\ue260"],
     ["=", "\ue261"]
   ];
-
-  playAbc = async abcNotation => {
-    AbcjsMidi.renderMidi(
-      "abc",
-      abcNotation,
-      {},
-      { generateInline: false, generateDownload: true },
-      {}
-    );
-    const myDiv = document.getElementById("abc");
-    const userInputMidiUrl = myDiv.children[0].children[0].getAttribute("href");
-    await this.midiPlayer.stop();
-    await this.midiPlayer.play({ url: userInputMidiUrl });
-  };
 
   increasePitchOfLastNote = () => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
@@ -242,22 +224,11 @@ class MusicInputFormContainer extends Component {
           this.props.phase === "finished") && (
           <button
             className="ugly-button"
-            onClick={
-              isIOS || isSafari
-                ? () =>
-                    MelodyListContainer.playSynth(
-                      this.state.original +
-                        "\n" +
-                        this.state.userInput.join(" "),
-                      this.props.melody.id,
-                      this.midiBuffer
-                    )
-                : () =>
-                    this.playAbc(
-                      this.state.original +
-                        "\n" +
-                        this.state.userInput.join(" ")
-                    )
+            onClick={() =>
+              play(
+                this.state.original + "\n" + this.state.userInput.join(" "),
+                this.midiPlayer
+              )
             }
           >
             Play your answer

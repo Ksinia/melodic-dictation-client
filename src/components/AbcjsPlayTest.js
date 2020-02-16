@@ -56,10 +56,7 @@ z F G _A | _B _A G F | F E F G| F/2 E3/2 z |`;
             Source code
           </a>
         </p>
-        <p>
-          Version of abcjs:
-          github:paulrosen/abcjs#36859117c5883581d992b65f013c53f6522c7c56
-        </p>
+        <p>Version of abcjs: 6.0.0-beta.2</p>
         <p>Version of web-midi-player: 1.3.0</p>
         <button
           onClick={() => {

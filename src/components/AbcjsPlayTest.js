@@ -33,7 +33,7 @@ z F G _A | _B _A G F | F E F G| F/2 E3/2 z |`;
     const visualObj = await ABCJS.renderAbc("abcjs", abcNotation)[0];
     await midiBuffer.init({
       visualObj: visualObj,
-      soundFontUrl: "http://gleitz.github.io/midi-js-soundfonts/MusyngKite/"
+      soundFontUrl: "https://gleitz.github.io/midi-js-soundfonts/MusyngKite/"
     });
     await midiBuffer.prime();
     await midiBuffer.start();

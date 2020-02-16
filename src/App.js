@@ -9,6 +9,7 @@ import Toolbar from "./components/Toolbar";
 import Footer from "./components/Footer";
 import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
 import GithubCorner from "react-github-corner";
+import AbcjsPlayTest from "./components/AbcjsPlayTest";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
         <Switch>
           <Route path="/signup" component={SignupContainer} />
           <Route path="/login" component={LoginContainer} />
+          <Route exact path="/abcjs_play_test" component={AbcjsPlayTest} />
           <Route
             exact
             path="/melody/:melodyId"

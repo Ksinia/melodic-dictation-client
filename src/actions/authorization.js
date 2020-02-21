@@ -14,6 +14,7 @@ const loginError = error => {
   };
 };
 export const logOut = () => {
+  localStorage.removeItem("jwt");
   return {
     type: LOGOUT
   };
@@ -29,6 +30,7 @@ export const loginSignupFunction = (
   try {
     const response = await superagent.post(url).send({ name, password });
     const action = JSON.parse(response.text);
+    localStorage.setItem("jwt", action.payload.jwt);
     dispatch(action);
     // dispatch the action that there is no errors
     dispatch(loginError(null));
@@ -37,5 +39,22 @@ export const loginSignupFunction = (
     console.log("error test:", error);
     console.log(error.response.body);
     dispatch(loginError(error.response.body));
+  }
+};
+
+export const getProfileFetch = () => async dispatch => {
+  const jwt = localStorage.jwt;
+  const url = `${baseUrl}/profile`;
+  if (jwt) {
+    try {
+      const response = await superagent
+        .get(url)
+        .set("Authorization", `Bearer ${jwt}`);
+      const action = JSON.parse(response.text);
+      dispatch(action);
+    } catch (error) {
+      console.error();
+      localStorage.removeItem("jwt");
+    }
   }
 };

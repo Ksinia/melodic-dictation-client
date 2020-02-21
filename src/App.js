@@ -10,8 +10,13 @@ import Footer from "./components/Footer";
 import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
 import GithubCorner from "react-github-corner";
 import AbcjsPlayTest from "./components/AbcjsPlayTest";
+import { getProfileFetch } from "./actions/authorization.js";
 
 class App extends Component {
+  componentDidMount = () => {
+    this.props.dispatch(getProfileFetch());
+  };
+
   render() {
     return [
       <div className="App" key="app">

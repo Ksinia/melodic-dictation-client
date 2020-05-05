@@ -1,19 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import Login from "./Login";
 import FormContainer from "./FormContainer";
 
-class LoginContainer extends Component {
-  render() {
-    return (
-      <FormContainer
-        type="login"
-        Display={Login}
-        history={this.props.history}
-        error={this.props.error}
-      />
-    );
-  }
+function LoginContainer(props) {
+  return (
+    <FormContainer
+      type="login"
+      Display={Login}
+      history={props.history}
+      error={props.error}
+    />
+  );
 }
 
-export default connect()(LoginContainer);
+export default LoginContainer;

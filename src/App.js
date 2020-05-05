@@ -18,26 +18,27 @@ class App extends Component {
   };
 
   render() {
-    return [
-      <div className="App" key="app">
-        <GithubCorner href="https://github.com/Ksinia/melodic-dictation-client" />
-
-        <Toolbar />
-        <Switch>
-          <Route path="/signup" component={SignupContainer} />
-          <Route path="/login" component={LoginContainer} />
-          <Route exact path="/abcjs_play_test" component={AbcjsPlayTest} />
-          <Route
-            exact
-            path="/melody/:melodyId"
-            component={MelodyDetailsPageContainer}
-          />
-          <Route path="/melody" component={MelodyListContainer} />
-          <Route path="/" component={MelodyListContainer} />
-        </Switch>
-      </div>,
-      <Footer key="footer" />,
-    ];
+    return (
+      <React.Fragment>
+        <div className="App" key="app">
+          <GithubCorner href="https://github.com/Ksinia/melodic-dictation-client" />
+          <Toolbar />
+          <Switch>
+            <Route path="/signup" component={SignupContainer} />
+            <Route path="/login" component={LoginContainer} />
+            <Route exact path="/abcjs_play_test" component={AbcjsPlayTest} />
+            <Route
+              exact
+              path="/melody/:melodyId"
+              component={MelodyDetailsPageContainer}
+            />
+            <Route path="/melody" component={MelodyListContainer} />
+            <Route path="/" component={MelodyListContainer} />
+          </Switch>
+        </div>
+        <Footer key="footer" />
+      </React.Fragment>
+    );
   }
 }
 

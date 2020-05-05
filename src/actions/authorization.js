@@ -7,12 +7,10 @@ export const LOGOUT = "LOGOUT";
 //this action is created on server side
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
-const loginError = (error) => {
-  return {
-    type: LOGIN_OR_SIGNUP_ERROR,
-    payload: error,
-  };
-};
+const loginError = (error) => ({
+  type: LOGIN_OR_SIGNUP_ERROR,
+  payload: error,
+});
 export const logOut = () => {
   localStorage.removeItem("jwt");
   return {

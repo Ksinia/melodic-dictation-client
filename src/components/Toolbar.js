@@ -11,14 +11,15 @@ class Toolbar extends Component {
   };
 
   render() {
+    const { user } = this.props;
     return (
       <div className="toolbar">
         <Link to="/melody">List of melodies</Link>
-        {!this.props.user && <Link to="/signup">Sign up</Link>}
+        {!user && <Link to="/signup">Sign up</Link>}
 
-        {this.props.user && <span>Welcome {this.props.user.name}!</span>}
+        {user && <span>Welcome {user.name}!</span>}
 
-        {!this.props.user && <Link to="/login">Log in</Link>}
+        {!user && <Link to="/login">Log in</Link>}
 
         {this.props.user && (
           <span className="logout" onClick={this.handleClick}>

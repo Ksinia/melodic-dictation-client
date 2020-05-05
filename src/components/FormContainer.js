@@ -3,12 +3,10 @@ import { connect } from "react-redux";
 import { loginSignupFunction } from "../actions/authorization";
 
 class FormContainer extends Component {
-  initialState = {
+  state = {
     name: "",
     password: "",
   };
-
-  state = this.initialState;
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });

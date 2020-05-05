@@ -9,9 +9,8 @@ export default function Copyright() {
         {"Copyright © "}
         <Link color="inherit" href="https://ksinia.net/cv/">
           Ksenia Gulyaeva
-        </Link>{" "}
-        {new Date().getFullYear()}
-        {"."}
+        </Link>
+        {` ${new Date().getFullYear()}.`}
       </Typography>
     </footer>
   );

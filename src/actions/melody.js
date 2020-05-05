@@ -35,8 +35,6 @@ export const loadMelody = (melodyId) => async (dispatch) => {
 
 export const CLEAR_MELODY = "CLEAR_MELODY";
 
-export function clearMelodyDetails() {
-  return {
-    type: CLEAR_MELODY,
-  };
-}
+export const clearMelodyDetails = () => ({
+  type: CLEAR_MELODY,
+});

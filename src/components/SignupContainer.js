@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Signup from "./Signup";
 import FormContainer from "./FormContainer";
 
@@ -16,4 +15,4 @@ class SignupContainer extends Component {
   }
 }
 
-export default connect()(SignupContainer);
+export default SignupContainer;

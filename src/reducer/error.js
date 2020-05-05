@@ -1,6 +1,8 @@
+import { LOGIN_OR_SIGNUP_ERROR } from "../actions/authorization";
+
 export default function reducer(state = null, action = {}) {
   switch (action.type) {
-    case "LOGIN_OR_SIGNUP_ERROR": {
+    case LOGIN_OR_SIGNUP_ERROR: {
       return action.payload;
     }
     default:

@@ -26,11 +26,10 @@ export const submitAnswer = (melodyId, dictationId, userInput) => async (
 ) => {
   const url = `${baseUrl}/melody/${melodyId}/dictation/${dictationId}`;
   try {
-    const userInputObject = { userInput: userInput };
     const response = await superagent
       .put(url)
       .set("Authorization", `Bearer ${getState().user.jwt}`)
-      .send(userInputObject);
+      .send({ userInput });
     const action = {
       type: DICTATION_FETCHED,
       payload: response.body,

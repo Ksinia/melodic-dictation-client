@@ -1,9 +1,9 @@
 import React from "react";
 import ReactAbcjs from "react-abcjs";
-import MusicInputFormContainer from "./MusicInputFormContainer";
-import "./MelodyDetailsPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import MusicInputFormContainer from "./MusicInputFormContainer";
+import "./MelodyDetailsPage.css";
 import play from "./functions/play";
 
 function MelodyDetailsPage(props) {

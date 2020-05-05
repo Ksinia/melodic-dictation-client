@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import MelodyList from "./MelodyList";
-import { loadMelodies } from "../actions/melody";
 import { connect } from "react-redux";
 import MidiPlayer from "web-midi-player";
 import ABCJS from "abcjs";
+import { loadMelodies } from "../actions/melody";
+import MelodyList from "./MelodyList";
 
 class MelodyListContainer extends Component {
   midiPlayer = new MidiPlayer();

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import GithubCorner from "react-github-corner";
 import LoginContainer from "./components/LoginContainer";
 import SignupContainer from "./components/SignupContainer";
-import { connect } from "react-redux";
 import MelodyListContainer from "./components/MelodyListContainer";
 import Toolbar from "./components/Toolbar";
 import Footer from "./components/Footer";
 import MelodyDetailsPageContainer from "./components/MelodyDetailsPageContainer";
-import GithubCorner from "react-github-corner";
 import AbcjsPlayTest from "./components/AbcjsPlayTest";
 import { getProfileFetch } from "./actions/authorization.js";
 

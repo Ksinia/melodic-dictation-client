@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Login from "./Login";
 import FormContainer from "./FormContainer";
-import { connect } from "react-redux";
 
 class LoginContainer extends Component {
   render() {

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { loadMelody, clearMelodyDetails } from "../actions/melody";
 import { connect } from "react-redux";
 import MidiPlayer from "web-midi-player";
+import { clearMelodyDetails, loadMelody } from "../actions/melody";
+import { loadStats, startDictation } from "../actions/dictation";
 import MelodyDetailsPage from "./MelodyDetailsPage";
-import { startDictation, loadStats } from "../actions/dictation";
 
 class MelodyDetailsPageContainer extends Component {
   melodyId = this.props.match.params.melodyId;

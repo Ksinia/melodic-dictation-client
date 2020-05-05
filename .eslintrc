@@ -8,14 +8,15 @@
     "sourceType": "module",
     "ecmaVersion": 2018
   },
-  "plugins": ["prettier"],
   "extends": [
     "eslint:recommended",
-    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "plugin:react/recommended"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "no-duplicate-imports": 2,
+    "import/order": 2,
     "react/prop-types": 0,
     "react/no-unescaped-entities": 0
   }

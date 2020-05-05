@@ -1,4 +1,4 @@
-import { MELODY_LOADED, CLEAR_MELODY } from "../actions/melody";
+import { CLEAR_MELODY, MELODY_LOADED } from "../actions/melody";
 
 export default function reducer(state = null, action = {}) {
   switch (action.type) {

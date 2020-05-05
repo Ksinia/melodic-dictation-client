@@ -51,7 +51,7 @@ class MusicInputFormContainer extends Component {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
 
     if (this.state.userInput.length > 0 && lastNote !== "|") {
-      this.pitchesAndRegex.forEach((pitch, index, array) => {
+      this.pitchesAndRegex.forEach((pitch, index) => {
         const notReachHighestLine = index < this.pitchesAndRegex.length - 1;
         const pitchOfLastNote = lastNote.match(pitch[1]);
         if (pitchOfLastNote && notReachHighestLine) {
@@ -72,7 +72,7 @@ class MusicInputFormContainer extends Component {
   decreasePitchOfLastNote = () => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
     if (this.state.userInput.length > 0 && lastNote !== "|") {
-      this.pitchesAndRegex.forEach((pitch, index, array) => {
+      this.pitchesAndRegex.forEach((pitch, index) => {
         const notReachLowestLine = index > 0;
         const pitchOfLastNote = lastNote.match(pitch[1]);
         if (pitchOfLastNote && notReachLowestLine) {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class DictationInfoContainer extends Component {
   melodyId = this.props.match.params.id;

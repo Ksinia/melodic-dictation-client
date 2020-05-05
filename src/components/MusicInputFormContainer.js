@@ -6,6 +6,36 @@ import MidiPlayer from "web-midi-player";
 import { loadStats, submitAnswer } from "../actions/dictation";
 import play from "./functions/play";
 
+const pitchesAndRegex = [
+  ["F,", /F,/],
+  ["G,", /G,/],
+  ["A,", /A,/],
+  ["B,", /B,/],
+  ["C", /C(?!,)(?!')/],
+  ["D", /D(?!,)(?!')/],
+  ["E", /E(?!,)(?!')/],
+  ["F", /F(?!,)(?!')/],
+  ["G", /G(?!,)(?!')/],
+  ["A", /A(?!,)(?!')/],
+  ["B", /B(?!,)(?!')/],
+  ["c", /c(?!,)(?!')/],
+  ["d", /d(?!,)(?!')/],
+  ["e", /e(?!,)(?!')/],
+  ["f", /f(?!,)(?!')/],
+  ["g", /g(?!,)(?!')/],
+  ["a", /a(?!,)(?!')(?!r)/],
+  ["b", /b(?!,)(?!')/],
+  ["c'", /c'/],
+  ["d'", /d'/],
+  ["e'", /e'/],
+];
+
+const signs = [
+  ["^", "\ue262"],
+  ["_", "\ue260"],
+  ["=", "\ue261"],
+];
+
 class MusicInputFormContainer extends Component {
   initialState = {
     original: this.props.melody.abcStart,
@@ -17,77 +47,46 @@ class MusicInputFormContainer extends Component {
 
   midiPlayer = new MidiPlayer();
 
-  pitchesAndRegex = [
-    ["F,", /F,/],
-    ["G,", /G,/],
-    ["A,", /A,/],
-    ["B,", /B,/],
-    ["C", /C(?!,)(?!')/],
-    ["D", /D(?!,)(?!')/],
-    ["E", /E(?!,)(?!')/],
-    ["F", /F(?!,)(?!')/],
-    ["G", /G(?!,)(?!')/],
-    ["A", /A(?!,)(?!')/],
-    ["B", /B(?!,)(?!')/],
-    ["c", /c(?!,)(?!')/],
-    ["d", /d(?!,)(?!')/],
-    ["e", /e(?!,)(?!')/],
-    ["f", /f(?!,)(?!')/],
-    ["g", /g(?!,)(?!')/],
-    ["a", /a(?!,)(?!')(?!r)/],
-    ["b", /b(?!,)(?!')/],
-    ["c'", /c'/],
-    ["d'", /d'/],
-    ["e'", /e'/],
-  ];
-
-  signs = [
-    ["^", "\ue262"],
-    ["_", "\ue260"],
-    ["=", "\ue261"],
-  ];
-
   increasePitchOfLastNote = () => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
-
     if (this.state.userInput.length > 0 && lastNote !== "|") {
-      this.pitchesAndRegex.forEach((pitch, index) => {
-        const notReachHighestLine = index < this.pitchesAndRegex.length - 1;
-        const pitchOfLastNote = lastNote.match(pitch[1]);
-        if (pitchOfLastNote && notReachHighestLine) {
-          this.setState({
-            ...this.state,
-            userInput: [
-              ...this.state.userInput.slice(0, -1),
-              lastNote.replace(
-                pitchOfLastNote,
-                this.pitchesAndRegex[index + 1][0]
-              ),
-            ],
-          });
-        }
-      });
+      const pitchIndex = pitchesAndRegex.findIndex((pitch) =>
+        lastNote.match(pitch[1])
+      );
+      // we are able to increase the pinch
+      if (pitchIndex < pitchesAndRegex.length - 1 && -1 < pitchIndex) {
+        this.setState({
+          ...this.state,
+          userInput: [
+            ...this.state.userInput.slice(0, -1),
+            lastNote.replace(
+              pitchesAndRegex[pitchIndex][0],
+              pitchesAndRegex[pitchIndex + 1][0]
+            ),
+          ],
+        });
+      }
     }
   };
   decreasePitchOfLastNote = () => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
     if (this.state.userInput.length > 0 && lastNote !== "|") {
-      this.pitchesAndRegex.forEach((pitch, index) => {
-        const notReachLowestLine = index > 0;
-        const pitchOfLastNote = lastNote.match(pitch[1]);
-        if (pitchOfLastNote && notReachLowestLine) {
-          this.setState({
-            ...this.state,
-            userInput: [
-              ...this.state.userInput.slice(0, -1),
-              lastNote.replace(
-                pitchOfLastNote,
-                this.pitchesAndRegex[index - 1][0]
-              ),
-            ],
-          });
-        }
-      });
+      const pitchIndex = pitchesAndRegex.findIndex((pitch) =>
+        lastNote.match(pitch[1])
+      );
+      // we are able to decrease the pinch
+      if (pitchIndex > 0) {
+        this.setState({
+          ...this.state,
+          userInput: [
+            ...this.state.userInput.slice(0, -1),
+            lastNote.replace(
+              pitchesAndRegex[pitchIndex][0],
+              pitchesAndRegex[pitchIndex - 1][0]
+            ),
+          ],
+        });
+      }
     }
   };
 
@@ -112,7 +111,7 @@ class MusicInputFormContainer extends Component {
     let updatedLastNote = "";
     const pressedSign = event.target.getAttribute("name");
     if (this.state.userInput.length > 0 && lastNote !== "|") {
-      const existingSign = this.signs.find((sign) => {
+      const existingSign = signs.find((sign) => {
         return lastNote.includes(sign[0]);
       });
       if (existingSign && existingSign[0] !== pressedSign) {
@@ -197,7 +196,7 @@ class MusicInputFormContainer extends Component {
       replacedText = this.props.melody.abcStart.replace(/Q:.*\nI:.*\n/, "");
     }
     return (
-      <div>
+      <React.Fragment>
         <p className="answerHeader">Your answer:</p>
         <div style={{ width: width + 30, margin: "auto", textAlign: "left" }}>
           <ReactAbcjs
@@ -263,7 +262,7 @@ class MusicInputFormContainer extends Component {
                 className="signs"
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
-                {this.signs.map((sign) => {
+                {signs.map((sign) => {
                   return (
                     <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
                       <div className="symbol" name={sign[0]}>
@@ -313,7 +312,7 @@ class MusicInputFormContainer extends Component {
             )}
           </div>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }

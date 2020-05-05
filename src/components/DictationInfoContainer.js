@@ -12,8 +12,8 @@ class DictationInfoContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  dictation: state.dictation
+const mapStateToProps = (state) => ({
+  dictation: state.dictation,
 });
 
 export default connect(mapStateToProps)(DictationInfoContainer);

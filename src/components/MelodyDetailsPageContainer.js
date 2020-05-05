@@ -11,7 +11,7 @@ class MelodyDetailsPageContainer extends Component {
 
   state = { phase: "notStarted" };
 
-  changePhase = phase => {
+  changePhase = (phase) => {
     this.setState({ phase: phase });
   };
 
@@ -52,7 +52,7 @@ function mapStateToProps(state) {
     melody: state.melody,
     dictation: state.dictation,
     user: state.user,
-    stats: state.stats
+    stats: state.stats,
   };
 }
 

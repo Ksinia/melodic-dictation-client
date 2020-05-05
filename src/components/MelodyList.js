@@ -10,7 +10,7 @@ function MelodyList(props) {
     <h1 key="title">List of melodies</h1>,
     <div key="list" className="melody-list">
       {props.melodies
-        ? props.melodies.map(melody => (
+        ? props.melodies.map((melody) => (
             <div key={melody.id} className="list-element">
               <div className="text">
                 <Link to={`/melody/${melody.id}`}>
@@ -33,7 +33,7 @@ function MelodyList(props) {
             </div>
           ))
         : "Loading..."}
-    </div>
+    </div>,
   ];
 }
 

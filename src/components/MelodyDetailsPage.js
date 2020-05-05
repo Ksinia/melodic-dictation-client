@@ -66,12 +66,12 @@ function MelodyDetailsPage(props) {
                         wrap: {
                           minSpacing: 0.8,
                           maxSpacing: 1.8,
-                          preferredMeasuresPerLine: 4
-                        }
+                          preferredMeasuresPerLine: 4,
+                        },
                       }}
                       engraverParams={{
                         staffwidth: Math.min(800, window.innerWidth - 30),
-                        scale: 1.3
+                        scale: 1.3,
                       }}
                       renderParams={{}}
                     />

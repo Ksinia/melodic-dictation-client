@@ -36,14 +36,14 @@ class App extends Component {
           <Route path="/" component={MelodyListContainer} />
         </Switch>
       </div>,
-      <Footer key="footer" />
+      <Footer key="footer" />,
     ];
   }
 }
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
   };
 }
 export default connect(mapStateToProps)(App);

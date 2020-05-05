@@ -3,7 +3,7 @@ import { url as baseUrl } from "../url";
 
 export const DICTATION_FETCHED = "DICTATION_FETCHED";
 
-export const startDictation = melodyId => async (dispatch, getState) => {
+export const startDictation = (melodyId) => async (dispatch, getState) => {
   const url = `${baseUrl}/melody/${melodyId}/dictation`;
   try {
     const response = await superagent
@@ -12,7 +12,7 @@ export const startDictation = melodyId => async (dispatch, getState) => {
       .send(melodyId);
     const action = {
       type: DICTATION_FETCHED,
-      payload: response.body
+      payload: response.body,
     };
     dispatch(action);
   } catch (error) {
@@ -33,7 +33,7 @@ export const submitAnswer = (melodyId, dictationId, userInput) => async (
       .send(userInputObject);
     const action = {
       type: DICTATION_FETCHED,
-      payload: response.body
+      payload: response.body,
     };
     dispatch(action);
   } catch (error) {
@@ -43,7 +43,7 @@ export const submitAnswer = (melodyId, dictationId, userInput) => async (
 
 export const PREVIOUS_DICTATIONS_FETCHED = "PREVIOUS_DICTATIONS_FETCHED";
 
-export const loadDictations = melodyId => async (dispatch, getState) => {
+export const loadDictations = (melodyId) => async (dispatch, getState) => {
   const url = `${baseUrl}/melody/${melodyId}/dictation`;
   try {
     const response = await superagent
@@ -51,7 +51,7 @@ export const loadDictations = melodyId => async (dispatch, getState) => {
       .set("Authorization", `Bearer ${getState().user.jwt}`);
     const action = {
       type: PREVIOUS_DICTATIONS_FETCHED,
-      payload: response.body
+      payload: response.body,
     };
     dispatch(action);
   } catch (error) {
@@ -60,7 +60,7 @@ export const loadDictations = melodyId => async (dispatch, getState) => {
 };
 export const STATS_FETCHED = "STATS_FETCHED";
 
-export const loadStats = melodyId => async (dispatch, getState) => {
+export const loadStats = (melodyId) => async (dispatch, getState) => {
   const url = `${baseUrl}/melody/${melodyId}/stats`;
   try {
     const response = await superagent
@@ -68,7 +68,7 @@ export const loadStats = melodyId => async (dispatch, getState) => {
       .set("Authorization", `Bearer ${getState().user.jwt}`);
     const action = {
       type: STATS_FETCHED,
-      payload: response.body
+      payload: response.body,
     };
     dispatch(action);
   } catch (error) {

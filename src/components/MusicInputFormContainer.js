@@ -10,7 +10,7 @@ class MusicInputFormContainer extends Component {
   initialState = {
     original: this.props.melody.abcStart,
     userInput: [],
-    notes: []
+    notes: [],
   };
 
   state = this.initialState;
@@ -38,13 +38,13 @@ class MusicInputFormContainer extends Component {
     ["b", /b(?!,)(?!')/],
     ["c'", /c'/],
     ["d'", /d'/],
-    ["e'", /e'/]
+    ["e'", /e'/],
   ];
 
   signs = [
     ["^", "\ue262"],
     ["_", "\ue260"],
-    ["=", "\ue261"]
+    ["=", "\ue261"],
   ];
 
   increasePitchOfLastNote = () => {
@@ -62,8 +62,8 @@ class MusicInputFormContainer extends Component {
               lastNote.replace(
                 pitchOfLastNote,
                 this.pitchesAndRegex[index + 1][0]
-              )
-            ]
+              ),
+            ],
           });
         }
       });
@@ -83,8 +83,8 @@ class MusicInputFormContainer extends Component {
               lastNote.replace(
                 pitchOfLastNote,
                 this.pitchesAndRegex[index - 1][0]
-              )
-            ]
+              ),
+            ],
           });
         }
       });
@@ -102,17 +102,17 @@ class MusicInputFormContainer extends Component {
       }
       this.setState({
         ...this.state,
-        userInput: [...this.state.userInput.slice(0, -1), updatedLastNote]
+        userInput: [...this.state.userInput.slice(0, -1), updatedLastNote],
       });
     }
   };
 
-  addSign = event => {
+  addSign = (event) => {
     const lastNote = this.state.userInput[this.state.userInput.length - 1];
     let updatedLastNote = "";
     const pressedSign = event.target.getAttribute("name");
     if (this.state.userInput.length > 0 && lastNote !== "|") {
-      const existingSign = this.signs.find(sign => {
+      const existingSign = this.signs.find((sign) => {
         return lastNote.includes(sign[0]);
       });
       if (existingSign && existingSign[0] !== pressedSign) {
@@ -124,12 +124,12 @@ class MusicInputFormContainer extends Component {
       }
       this.setState({
         ...this.state,
-        userInput: [...this.state.userInput.slice(0, -1), updatedLastNote]
+        userInput: [...this.state.userInput.slice(0, -1), updatedLastNote],
       });
     }
   };
 
-  addNote = event => {
+  addNote = (event) => {
     let newState = { ...this.state };
     newState.userInput.push(event.target.getAttribute("name"));
     this.setState(newState);
@@ -186,7 +186,7 @@ class MusicInputFormContainer extends Component {
       ["E" + minNoteDuration / 2, "\ue1d3"],
       ["E" + minNoteDuration / 4, "\ue1d5"],
       // below we do not need to add number, because in abc notation E already means E1
-      ["E", "\ue1d7"]
+      ["E", "\ue1d7"],
     ];
     this.setState({ ...this.state, notes });
   }
@@ -209,13 +209,13 @@ class MusicInputFormContainer extends Component {
               wrap: {
                 minSpacing: 0.8,
                 maxSpacing: 1.8,
-                preferredMeasuresPerLine: 4
-              }
+                preferredMeasuresPerLine: 4,
+              },
             }}
             engraverParams={{
               staffwidth: width,
               scale: 1.3,
-              add_classes: true
+              add_classes: true,
             }}
             renderParams={{}}
           />
@@ -241,7 +241,7 @@ class MusicInputFormContainer extends Component {
                 className="notes"
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
-                {this.state.notes.map(note => {
+                {this.state.notes.map((note) => {
                   return (
                     <div key={note[1]} name={note[0]} onClick={this.addNote}>
                       <div className="symbol" name={note[0]}>
@@ -263,7 +263,7 @@ class MusicInputFormContainer extends Component {
                 className="signs"
                 style={{ fontFamily: "Bravura", fontSize: 40 }}
               >
-                {this.signs.map(sign => {
+                {this.signs.map((sign) => {
                   return (
                     <div key={sign[0]} name={sign[0]} onClick={this.addSign}>
                       <div className="symbol" name={sign[0]}>
@@ -290,7 +290,7 @@ class MusicInputFormContainer extends Component {
                     if (this.state.userInput.length > 0) {
                       this.setState({
                         ...this.state,
-                        userInput: this.state.userInput.slice(0, -1)
+                        userInput: this.state.userInput.slice(0, -1),
                       });
                     }
                   }}
@@ -322,7 +322,7 @@ function mapStateToProps(state) {
   return {
     melody: state.melody,
     dictation: state.dictation,
-    user: state.user
+    user: state.user,
   };
 }
 export default connect(mapStateToProps)(MusicInputFormContainer);

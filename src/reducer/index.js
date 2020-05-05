@@ -12,5 +12,5 @@ export default combineReducers({
   melodies,
   melody,
   dictation,
-  stats
+  stats,
 });

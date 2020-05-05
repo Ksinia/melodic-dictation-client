@@ -10,7 +10,7 @@ class MelodyListContainer extends Component {
 
   static playAbcjs = async (abcNotation, midiPlayer) => {
     const midi = await ABCJS.synth.getMidiFile(abcNotation, {
-      midiOutputType: "binary"
+      midiOutputType: "binary",
     });
     await midiPlayer.stop();
     midiPlayer.play({ arrayBuffer: midi[0] });
@@ -29,7 +29,7 @@ class MelodyListContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    melodies: state.melodies
+    melodies: state.melodies,
   };
 }
 
